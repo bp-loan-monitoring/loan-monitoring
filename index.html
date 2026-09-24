@@ -594,7 +594,7 @@ function viewLoanDetail(){
         <button class="btn btn-ghost btn-sm" onclick="toggleStatus('${l.id}')">${l.status==="closed"?"Reopen":"Mark paid off"}</button>
         <button class="btn btn-ghost btn-sm" onclick="editLoan('${l.id}')">Edit loan</button>
         <button class="btn btn-danger btn-sm" onclick="deleteLoan('${l.id}')">Delete</button></div></div>
-    <p class="muted">First applicable month: ${esc(l.firstMonth||'not set')}${l.reference?' &middot; Ref: '+esc(l.reference):''}</p>
+    <p class="muted">First amortization month: ${esc(l.firstMonth||'not set')}${l.reference?' &middot; Ref: '+esc(l.reference):''}</p>
     ${paidNotice}${notice}${missNotice}${amtNotice}
     <div class="facts">${factsHTML}</div>
     ${l.notes?`<div class="notice info"><b>HR note:</b> ${esc(l.notes)}</div>`:""}
