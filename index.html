@@ -232,7 +232,7 @@
     <h1>Loan Monitoring System</h1>
     <div class="sub">SSS &amp; Pag-IBIG Fund</div>
     <div class="field"><label>Email or username</label>
-      <input id="u" type="text" autocomplete="username" placeholder="admin" required></div>
+      <input id="u" type="text" autocomplete="username" placeholder="Enter your email or username" required></div>
     <div class="field"><label>Password</label>
       <input id="p" type="password" autocomplete="current-password" placeholder="Enter password" required></div>
     <div class="login-msg" id="loginMsg"></div>
@@ -268,6 +268,7 @@
     <button data-v="reports" onclick="go('reports')">Reports</button>
     <button data-v="employees" onclick="go('employees')">Employees</button>
     <button data-v="exceptions" onclick="go('exceptions')">Exceptions</button>
+    <button data-v="users" onclick="go('users')">Users &amp; Roles</button>
   </nav>
   <main id="main"></main>
   <footer class="foot" id="foot"></footer>
@@ -306,17 +307,18 @@ function rowToEntry(r){return {id:r.id,loanId:r.loan_id,applicableMonth:r.applic
   first15:num(r.first15),second15:num(r.second15),totalRecorded:num(r.total_recorded),
   paymentType:r.payment_type||"REGULAR",remarks:r.remarks};}
 async function loadData(){
-  const [emp,loans,ents]=await Promise.all([
+  const [emp,loans,ents,profs]=await Promise.all([
     sb.from("employees").select("name").order("name"),
     sb.from("loans").select("*"),
-    sb.from("ledger_entries").select("*")]);
+    sb.from("ledger_entries").select("*"),
+    sb.from("profiles").select("id,full_name,email,role,employee")]);
   if(loans.error) throw loans.error;
   if(ents.error) throw ents.error;
   const L=(loans.data||[]).map(rowToLoan);
   const E=(ents.data||[]).map(rowToEntry);
   let names=(emp.data||[]).map(r=>r.name);
   if(!names.length) names=[...new Set(L.map(l=>l.employee))].sort();
-  STORE={employees:names,loans:L,entries:E};
+  STORE={employees:names,loans:L,entries:E,profiles:(profs&&profs.data)||[]};
 }
 async function reloadRender(){ try{await loadData();}catch(err){toast("Reload failed: "+(err.message||err));} (CURRENT_ROLE==="member")?renderMember():render(); }
 async function logAudit(action,entity,entity_id){ try{const {data:{user}}=await sb.auth.getUser(); await sb.from("audit_log").insert({actor:user.id,actor_name:CURRENT_USER,action,entity,entity_id:String(entity_id||"")});}catch(e){} }
@@ -409,7 +411,7 @@ function applyRoleUI(){
   const c=caps(), isMember=CURRENT_ROLE==="member";
   const tabs=document.getElementById("tabs"); if(tabs) tabs.style.display=isMember?"none":"";
   const dmb=document.getElementById("dataMenuBtn"); if(dmb) dmb.style.display=c.admin?"":"none";
-  const vis={post:c.post, employees:c.employees, exceptions:c.exceptions};
+  const vis={post:c.post, employees:c.employees, exceptions:c.exceptions, users:c.admin};
   document.querySelectorAll('#tabs button').forEach(b=>{ const v=b.dataset.v; if(v in vis) b.style.display=vis[v]?"":"none"; });
 }
 async function logout(){ try{await sb.auth.signOut();}catch(e){} showLogin(); }
@@ -440,8 +442,58 @@ function render(){
   else if(v==="reports")m.innerHTML=viewReports();
   else if(v==="employees")m.innerHTML=viewEmployees();
   else if(v==="exceptions")m.innerHTML=viewExceptions();
-  document.getElementById("foot").innerHTML=`Employee Loan Monitoring System &middot; ${STORE.loans.length} loans, ${STORE.entries.length} payment entries, ${STORE.employees.length} employees &middot; data saved on this device`;
+  else if(v==="users")m.innerHTML=viewUsers();
+  document.getElementById("foot").innerHTML=`Employee Loan Monitoring System &middot; ${STORE.loans.length} loans, ${STORE.entries.length} payment entries, ${STORE.employees.length} employees &middot; connected to shared database`;
   bindDynamic();
+}
+
+/* ===================== USERS & ROLES ===================== */
+const ROLE_OPTS=[["admin","Admin (full access)"],["encoder","Encoder (posts payments)"],["viewer","Viewer (read-only, all accounts)"],["member","Employee (self-service, own only)"]];
+const roleLabel=r=>(ROLE_OPTS.find(o=>o[0]===r)||[r,r])[1];
+function viewUsers(){
+  const emps=[...STORE.employees].sort((a,b)=>a.localeCompare(b));
+  const list=(STORE.profiles||[]).slice().sort((a,b)=>String(a.full_name||a.email||"").localeCompare(String(b.full_name||b.email||"")));
+  const rows=list.map(u=>{
+    const roleSel=`<select class="uRole">${ROLE_OPTS.map(o=>`<option value="${o[0]}"${u.role===o[0]?" selected":""}>${o[1]}</option>`).join("")}</select>`;
+    const empSel=`<select class="uEmp"><option value="">(not linked)</option>${emps.map(e=>`<option${u.employee===e?" selected":""}>${esc(e)}</option>`).join("")}</select>`;
+    return `<tr data-uid="${u.id}">
+      <td><b>${esc(u.full_name||"")}</b></td>
+      <td class="muted">${esc(u.email||"")}</td>
+      <td>${roleSel}</td>
+      <td>${empSel}</td>
+      <td class="act"><button class="rowbtn" onclick="saveUserRow('${u.id}')">Save</button></td>
+    </tr>`;
+  }).join("");
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Users &amp; Roles</h2>
+      <p>Assign each account's role. <b>Admin</b> has full access and manages users. <b>Encoder</b> posts payments. <b>Viewer</b> is read-only across all accounts (HR/payroll oversight). <b>Employee</b> is self-service and sees only their own loans, so link that person to their name.</p></div></div>
+    <div class="card" style="padding:0">
+      <table>
+        <thead><tr><th>Name</th><th>Email / username</th><th>Role</th><th>Linked employee</th><th class="act"></th></tr></thead>
+        <tbody>${rows||`<tr><td colspan="5" class="muted" style="padding:16px">No accounts yet. New logins appear here once created.</td></tr>`}</tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">Creating new employee logins from an email and resetting a person's password are handled on the member management screen (coming next). Changing an existing account's role and employee link works here now.</p>
+  </div>`;
+}
+async function saveUserRow(id){
+  if(!need("admin"))return;
+  const tr=document.querySelector(`#main tr[data-uid="${id}"]`); if(!tr)return;
+  const role=tr.querySelector(".uRole").value;
+  const employee=tr.querySelector(".uEmp").value||null;
+  const before=(STORE.profiles||[]).find(p=>p.id===id)||{};
+  const admins=(STORE.profiles||[]).filter(p=>p.role==="admin");
+  if(before.role==="admin" && role!=="admin" && admins.length<=1){
+    toast("This is the only admin. Assign another admin first."); return;
+  }
+  const {error}=await sb.from("profiles").update({role,employee}).eq("id",id);
+  if(error){ toast("Update failed: "+error.message); return; }
+  await logAudit("role_change",`profile:${role}`,id);
+  toast("Saved. "+esc(before.full_name||before.email||"Account")+" is now "+roleLabel(role));
+  await loadData();
+  const me=(STORE.profiles||[]).find(p=>p.email===CURRENT_USER);
+  if(me){ CURRENT_ROLE=me.role||CURRENT_ROLE; CURRENT_EMP=me.employee||null; applyRoleUI(); }
+  render();
 }
 
 /* ===================== DASHBOARD ===================== */
