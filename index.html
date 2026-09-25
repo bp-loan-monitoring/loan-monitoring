@@ -992,6 +992,7 @@ function viewEmployees(){
       <td class="num">${hasBal?peso(remaining):'<span class="muted">&#8211;</span>'}</td>
       <td class="act"><button class="rowbtn" onclick="printStatement('${esc(nm).replace(/'/g,"\\'")}')">Statement</button>
         <button class="rowbtn" onclick="editEmployee('${esc(nm).replace(/'/g,"\\'")}')">Edit</button>
+        ${em?`<button class="rowbtn" onclick="resetEmployeePw('${esc(nm).replace(/'/g,"\\'")}')">Reset pw</button>`:''}
         <button class="rowbtn del" onclick="deleteEmployee('${esc(nm).replace(/'/g,"\\'")}')">Delete</button></td></tr>`;}).join("");
   return `<div class="view"><div class="page-head"><div class="ht"><h2>Employees</h2><p>Each person's loan load at a glance, plus the email that links their self-service login to their own records.</p></div>
       <button class="btn btn-primary" onclick="editEmployee()">+ Add employee</button></div>
@@ -1214,22 +1215,62 @@ async function saveEmployee(oldName){
   if(!need('employees'))return;
   const nm=document.getElementById("emName").value.trim(), msg=document.getElementById("emMsg");
   const email=document.getElementById("emEmail").value.trim()||null;
+  const oldEmail=oldName?((STORE.empEmail||{})[oldName]||null):null;
   if(!nm){msg.textContent="Enter a name.";return;}
   if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.textContent="Enter a valid email, or leave it blank.";return;}
   if(STORE.employees.some(e=>e.toLowerCase()===nm.toLowerCase()&&e!==oldName)){msg.textContent="That employee already exists.";return;}
+  msg.textContent="Saving...";
   try{
     if(oldName){ let r1=await sb.from("employees").update({name:nm,email}).eq("name",oldName); if(r1.error)throw r1.error;
       let r2=await sb.from("loans").update({employee:nm}).eq("employee",oldName); if(r2.error)throw r2.error;
       if(nm!==oldName){ await sb.from("profiles").update({employee:nm}).eq("employee",oldName); } }
     else { let r=await sb.from("employees").insert({name:nm,email}); if(r.error)throw r.error; }
   }catch(err){ msg.textContent="Save failed: "+(err.message||err); return; }
-  closeModal(); toast(oldName?"Employee saved":"Employee added"); await reloadRender();
+  // Sync the login account to the email change.
+  const norm=s=>(s||"").trim().toLowerCase();
+  let note="";
+  try{
+    if(email && norm(email)!==norm(oldEmail)){
+      const {data,error}=await sb.functions.invoke("manage-user",{body:{action:"sync_email",employee:nm,email}});
+      if(error) throw new Error((data&&data.error)||error.message);
+      if(data&&data.error) throw new Error(data.error);
+      note=(data&&data.created)?` Login created for ${nm} (temporary password Better@1234).`:` Login for ${nm} re-enabled and linked.`;
+    } else if(email && nm!==oldName){
+      await sb.functions.invoke("manage-user",{body:{action:"sync_email",employee:nm,email}});
+    } else if(!email && oldEmail){
+      await sb.functions.invoke("manage-user",{body:{action:"disable_email",email:oldEmail}});
+      note=" That person's login was disabled and unlinked.";
+    }
+  }catch(e){ closeModal(); toast((oldName?"Employee saved":"Employee added")+", but the login could not be synced: "+(e.message||e)); await reloadRender(); return; }
+  closeModal(); toast((oldName?"Employee saved":"Employee added")+note); await reloadRender();
+}
+function resetEmployeePw(name){
+  if(!need('employees'))return;
+  const email=(STORE.empEmail||{})[name];
+  if(!email){ toast("Set this employee's email first, then a login can be created."); return; }
+  modal(`<h3>Reset password</h3><p class="muted" style="margin:0 0 8px">For <b>${esc(name)}</b> &middot; ${esc(email)}</p>
+    <div class="field"><label>New password</label><input id="rpNew" type="text" value="Better@1234"><div class="hintline">Give this to the employee. They can change it later on their own Password screen.</div></div>
+    <div class="form-msg" id="rpMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="doResetEmployeePw('${esc(name).replace(/'/g,"\\'")}')">Reset password</button></div>`,"narrow");
+}
+async function doResetEmployeePw(name){
+  const email=(STORE.empEmail||{})[name]; const pw=document.getElementById("rpNew").value; const msg=document.getElementById("rpMsg");
+  if(!pw||pw.length<6){ msg.textContent="Password must be at least 6 characters."; return; }
+  msg.textContent="Resetting...";
+  try{
+    const {data,error}=await sb.functions.invoke("manage-user",{body:{action:"reset_password",email,password:pw}});
+    if(error) throw new Error((data&&data.error)||error.message);
+    if(data&&data.error) throw new Error(data.error);
+  }catch(e){ msg.textContent="Reset failed: "+(e.message||e); return; }
+  closeModal(); toast("Password for "+name+" reset to: "+pw);
 }
 function deleteEmployee(name){
   if(!need('employees'))return;
   const loans=STORE.loans.filter(l=>l.employee===name).length;
   if(loans){confirmModal(`Delete <b>${esc(name)}</b>?`,`This employee has ${loans} loan${loans>1?'s':''}. Delete those loans first.`,null,"Got it");return;}
-  confirmModal(`Remove <b>${esc(name)}</b> from the employee list?`,`This cannot be undone.`,(async()=>{ const {error}=await sb.from("employees").delete().eq("name",name); if(error){toast("Delete failed: "+error.message);return;} toast("Employee removed"); await reloadRender(); }));
+  const em=(STORE.empEmail||{})[name];
+  confirmModal(`Remove <b>${esc(name)}</b> from the employee list?`,`This cannot be undone.${em?" Their login will be disabled and unlinked.":""}`,(async()=>{ const {error}=await sb.from("employees").delete().eq("name",name); if(error){toast("Delete failed: "+error.message);return;} if(em){ try{ await sb.functions.invoke("manage-user",{body:{action:"disable_email",email:em}}); }catch(e){} } toast("Employee removed"); await reloadRender(); }));
 }
 
 function confirmModal(title,body,onYes,okOnlyLabel){
