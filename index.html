@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Loan Monitoring System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+  /* Better Practice brand palette: navy #001C2C, blue #00ACE7, cyan #64DFFF, grey #F2F2F2 */
+  :root{
+    --bg:#eef2f5; --panel:#ffffff; --ink:#10222e; --muted:#566a77; --line:#e1e8ee;
+    --brand:#001c2c; --brand2:#0b7fb0; --blue:#00ace7; --cyan:#64dfff;
+    --sss:#00ace7; --hdmf:#0a3a52;
+    --warn:#b45309; --warn-bg:#fef3c7; --ok:#047857; --ok-bg:#d1fae5;
+    --danger:#b91c1c; --danger-bg:#fee2e2; --shadow:0 1px 3px rgba(0,28,44,.08),0 1px 2px rgba(0,28,44,.05);
+    --radius:12px;
+    --font-body:"Source Sans 3","Source Sans Pro","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --font-head:"Libre Franklin","Source Sans 3","Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--font-body);
+    background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{margin:0;font-weight:700;font-family:var(--font-head);letter-spacing:-.2px}
+  button{font-family:inherit;cursor:pointer}
+  a{color:var(--brand2);text-decoration:none}
+  .hidden{display:none !important}
+
+  /* LOGIN */
+  #login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#001c2c 0%,#003a52 55%,#00ace7 135%);padding:20px;z-index:50}
+  .login-card{background:var(--panel);width:100%;max-width:400px;border-radius:16px;
+    box-shadow:0 20px 45px rgba(2,6,23,.35);padding:34px 30px 26px;text-align:center}
+  .badge{width:60px;height:60px;border-radius:15px;margin:0 auto 14px;display:flex;align-items:center;
+    justify-content:center;background:#fff;border:1px solid var(--line);padding:8px}
+  .badge img{width:100%;height:100%;object-fit:contain;display:block}
+  .login-card h1{font-size:20px;letter-spacing:.2px}
+  .login-card .sub{color:var(--muted);font-size:12.5px;margin:4px 0 22px;text-transform:uppercase;letter-spacing:1.5px}
+  .field{text-align:left;margin-bottom:14px}
+  .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;font-weight:600}
+  .field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;
+    font-size:14px;background:#fbfcfe;font-family:inherit}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand2);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+  .pwwrap{position:relative}
+  .pwwrap input{padding-right:62px}
+  .pwtog{position:absolute;top:50%;right:6px;transform:translateY(-50%);border:none;background:#eef2f7;color:var(--brand);
+    font-size:12px;font-weight:650;padding:6px 10px;border-radius:7px;cursor:pointer}
+  .pwtog:hover{background:#e2e8f2}
+  .mywrap{display:inline-flex;gap:6px}
+  .mywrap select{min-width:0}
+  .field .mywrap{display:flex} .field .mywrap select{flex:1}
+  .btn{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:9px;padding:10px 15px;font-weight:650;font-size:13.5px;white-space:nowrap}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:#182f6f}
+  .btn-primary.full{width:100%;justify-content:center;padding:11px 16px;font-size:14px}
+  .btn-ghost{background:#eef2f7;color:var(--ink)}
+  .btn-ghost:hover{background:#e2e8f2}
+  .btn-danger{background:var(--danger);color:#fff}
+  .btn-danger:hover{background:#991b1b}
+  .btn-sm{padding:6px 10px;font-size:12px;border-radius:7px}
+  .login-msg{color:var(--danger);font-size:12.5px;min-height:16px;margin:2px 0 10px;text-align:left}
+  .login-foot{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.6}
+
+  /* SHELL */
+  #app{min-height:100vh;display:flex;flex-direction:column}
+  header.top{background:var(--brand);color:#fff;padding:0 18px;display:flex;align-items:center;gap:12px;
+    height:56px;position:sticky;top:0;z-index:40;box-shadow:0 2px 8px rgba(2,6,23,.18)}
+  header.top .logo{width:34px;height:34px;border-radius:8px;background:#fff;padding:4px;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  header.top .logo img{width:100%;height:100%;object-fit:contain;display:block}
+  header.top .title{font-size:15px;font-weight:700;white-space:nowrap;font-family:var(--font-head)}
+  header.top .title small{display:block;font-size:10px;opacity:.7;font-weight:500;letter-spacing:1px}
+  header.top .spacer{flex:1}
+  header.top .who{font-size:12px;opacity:.9;white-space:nowrap}
+  header.top .who b{font-weight:650}
+  .iconbtn{background:rgba(255,255,255,.14);border:none;color:#fff;padding:7px 11px;border-radius:8px;font-size:12px;font-weight:600}
+  .iconbtn:hover{background:rgba(255,255,255,.26)}
+  .menu{position:relative}
+  .menu-pop{position:absolute;right:0;top:40px;background:#fff;color:var(--ink);border:1px solid var(--line);
+    border-radius:10px;box-shadow:0 12px 30px rgba(2,6,23,.2);min-width:210px;padding:6px;z-index:45}
+  .menu-pop button{display:flex;width:100%;text-align:left;background:none;border:none;padding:9px 11px;border-radius:7px;
+    font-size:13px;color:var(--ink);gap:8px;align-items:center}
+  .menu-pop button:hover{background:#f1f5f9}
+  .menu-pop hr{border:none;border-top:1px solid var(--line);margin:5px 0}
+
+  nav.tabs{background:var(--panel);border-bottom:1px solid var(--line);padding:0 12px;display:flex;gap:2px;
+    position:sticky;top:56px;z-index:35;overflow-x:auto}
+  nav.tabs button{background:none;border:none;padding:13px 14px;font-size:13.5px;font-weight:600;color:var(--muted);
+    border-bottom:2.5px solid transparent;white-space:nowrap}
+  nav.tabs button.active{color:var(--brand);border-bottom-color:var(--brand)}
+  nav.tabs button:hover{color:var(--ink)}
+
+  main{padding:22px;max-width:1300px;width:100%;margin:0 auto;flex:1}
+  .view{animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .page-head{margin-bottom:16px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+  .page-head .ht{flex:1;min-width:200px}
+  .page-head h2{font-size:19px}
+  .page-head p{color:var(--muted);margin:3px 0 0;font-size:13px}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow)}
+  .kpi .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+  .kpi .val{font-size:23px;font-weight:750;margin-top:6px;letter-spacing:-.5px}
+  .kpi .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .kpi.accent-sss{border-top:3px solid var(--sss)}
+  .kpi.accent-hdmf{border-top:3px solid var(--hdmf)}
+  .kpi.accent-warn{border-top:3px solid var(--warn)}
+  .kpi.accent-brand{border-top:3px solid var(--brand)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .card h3 .tag{font-size:10.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+  .hbar-row{display:grid;grid-template-columns:135px 1fr 100px;align-items:center;gap:10px;margin-bottom:9px;font-size:12.5px}
+  .hbar-row .nm{color:var(--ink);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hbar-track{background:#eef2f7;border-radius:6px;height:16px;overflow:hidden}
+  .hbar-fill{height:100%;border-radius:6px}
+  .hbar-row .amt{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  .legend{display:flex;gap:16px;margin-top:6px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+  .toolbar input[type=search],.toolbar select{padding:8px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:var(--panel)}
+  .toolbar input[type=search]{min-width:210px}
+  .toolbar .count{color:var(--muted);font-size:12.5px;margin-left:auto}
+
+  .tablewrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:auto}
+  table{border-collapse:collapse;width:100%;font-size:12.8px}
+  thead th{background:#f6f8fb;text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+    color:var(--muted);font-weight:700;border-bottom:1px solid var(--line);position:sticky;top:0;white-space:nowrap}
+  thead th.sortable{cursor:pointer;user-select:none}
+  thead th.sortable:hover{color:var(--ink)}
+  thead th .arr{opacity:.5;font-size:9px}
+  tbody td{padding:9px 12px;border-bottom:1px solid #f0f3f8;vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#f8fafd}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  td.act,th.act{text-align:right;white-space:nowrap}
+  .utable td select{width:100%;max-width:340px;padding:8px 9px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff;color:var(--ink)}
+  .clickable{cursor:pointer}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:650;letter-spacing:.3px}
+  .pill.sss{background:#d3f0fb;color:#036b98}
+  .pill.hdmf{background:#d6e1e8;color:#0a3a52}
+  .pill.type{background:#f1f5f9;color:#475569}
+  .pill.warn{background:var(--warn-bg);color:var(--warn)}
+  .pill.ok{background:var(--ok-bg);color:var(--ok)}
+  .pill.none{background:#f1f5f9;color:#94a3b8}
+  .pill.closed{background:#e2e8f0;color:#475569}
+  .var-neg{color:var(--danger);font-weight:650}
+  .var-pos{color:var(--ok);font-weight:600}
+  .muted{color:var(--muted)}
+  .link{color:var(--brand2);font-weight:600;cursor:pointer}
+  .rowbtn{background:#eef2f7;border:none;color:var(--ink);padding:5px 9px;border-radius:6px;font-size:11.5px;font-weight:600;margin-left:5px}
+  .rowbtn:hover{background:#e2e8f2}
+  .rowbtn.del:hover{background:var(--danger-bg);color:var(--danger)}
+
+  .backlink{display:inline-flex;align-items:center;gap:6px;color:var(--brand2);font-weight:600;font-size:13px;margin-bottom:14px;background:none;border:none;padding:0}
+  .detail-head{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:6px}
+  .detail-head h2{font-size:20px}
+  .detail-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:16px 0 20px}
+  .fact{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
+  .fact .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+  .fact .v{font-size:16px;font-weight:700;margin-top:4px}
+  .notice{background:#fff8ed;border:1px solid #fde4bf;color:#92400e;border-radius:10px;padding:11px 14px;font-size:12.5px;margin-bottom:16px}
+  .notice.info{background:#eef4ff;border-color:#c7d7fe;color:#1e40af}
+
+  footer.foot{padding:16px 22px;text-align:center;color:var(--muted);font-size:11.5px}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;z-index:60;padding:20px}
+  .modal{background:var(--panel);border-radius:14px;max-width:560px;width:100%;padding:24px;box-shadow:0 20px 45px rgba(2,6,23,.4);max-height:90vh;overflow:auto}
+  .modal.narrow{max-width:400px}
+  .modal.wide{max-width:820px}
+  .modal h3{font-size:16px;margin-bottom:16px}
+  .modal .foot{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-grid .full{grid-column:1/-1}
+  @media(max-width:520px){.form-grid{grid-template-columns:1fr}}
+  .form-msg{color:var(--danger);font-size:12.5px;min-height:15px;margin-top:6px}
+  .form-msg.ok{color:var(--ok)}
+  .hintline{font-size:11px;color:var(--muted);margin-top:4px}
+  .gridtable input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;
+    padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(2,6,23,.35);z-index:80;opacity:0;transition:opacity .2s,transform .2s}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+  /* PRINT */
+  #printArea{display:none}
+  @media print{
+    #login,#app,#toast,#modalHost{display:none !important}
+    #printArea{display:block !important}
+    body{background:#fff}
+    .print-doc{max-width:100%;padding:0}
+    .print-doc h1{font-size:20px;margin-bottom:2px}
+    .print-doc .ph{color:#333;font-size:12px;margin-bottom:14px}
+    .print-doc table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:14px}
+    .print-doc th,.print-doc td{border:1px solid #bbb;padding:5px 7px;text-align:left}
+    .print-doc td.num,.print-doc th.num{text-align:right}
+    .print-doc h2{font-size:14px;margin:14px 0 6px}
+    .print-doc .sig{margin-top:40px;font-size:12px}
+  }
+  .print-doc{font-family:"Segoe UI",system-ui,sans-serif;color:#111}
+  @media(max-width:640px){
+    header.top{flex-wrap:wrap;height:auto;min-height:52px;padding:8px 12px;gap:8px}
+    header.top .title{font-size:13px}
+    header.top .title small{display:none}
+    header.top .spacer{display:none}
+    header.top .who{font-size:11px;order:6;flex-basis:100%;margin-top:-2px}
+    .iconbtn{padding:6px 9px;font-size:11.5px}
+    main{padding:14px}
+    .kpis{grid-template-columns:1fr 1fr;gap:10px}
+    .kpi{padding:12px 13px} .kpi .val{font-size:18px}
+    .page-head{align-items:stretch}
+    .page-head .btn{flex:1;justify-content:center}
+    .grid2{grid-template-columns:1fr}
+    .facts{grid-template-columns:1fr 1fr}
+    .toolbar{align-items:stretch}
+    .toolbar input[type=search],.toolbar select{min-width:0;width:100%}
+    .toolbar .count{margin-left:0}
+    table{font-size:12px} thead th,tbody td{padding:8px 8px}
+    .modal{padding:18px} .form-grid{grid-template-columns:1fr}
+    nav.tabs button{padding:11px 10px;font-size:12.5px}
+    .detail-actions{width:100%} .detail-actions .btn{flex:1}
+    /* Users & Roles: reflow the table into stacked cards so nothing runs off-screen */
+    .utable thead{display:none}
+    .utable, .utable tbody, .utable tr, .utable td{display:block;width:100%}
+    .utable tr{border:1px solid var(--line);border-radius:12px;margin:10px;padding:10px 12px;background:var(--panel);box-shadow:var(--shadow)}
+    .utable td{border:none;padding:7px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .utable td::before{content:attr(data-label);font-weight:600;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;flex:0 0 auto}
+    .utable td.uname{padding-bottom:2px}
+    .utable td.uname::before,.utable td.uemail::before,.utable td.act::before{display:none}
+    .utable td.uname b{font-size:15px}
+    .utable td.uemail{padding-top:0;justify-content:flex-start;font-size:12.5px;word-break:break-all}
+    .utable td select{max-width:62%}
+    .utable td.act{padding-top:10px;border-top:1px solid var(--line);margin-top:4px}
+    .utable td.act .rowbtn{width:100%;text-align:center;padding:11px;font-size:13.5px;margin-left:0}
+    .tablewrap:has(.utable){background:transparent;border:none;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <form class="login-card" onsubmit="doLogin(event)">
+    <div class="badge"><img src="data:image/png;base64,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" alt="Better Practice"></div>
+    <h1>Loan Monitoring System</h1>
+    <div class="sub">SSS &amp; Pag-IBIG Fund</div>
+    <div class="field"><label>Email or username</label>
+      <input id="u" type="text" autocomplete="username" placeholder="Enter your email or username" required></div>
+    <div class="field"><label>Password</label>
+      <div class="pwwrap">
+        <input id="p" type="password" autocomplete="current-password" placeholder="Enter password" required>
+        <button type="button" class="pwtog" id="pwtog" onclick="togglePw()" aria-label="Show password">Show</button>
+      </div></div>
+    <div class="login-msg" id="loginMsg"></div>
+    <button class="btn btn-primary full" type="submit">Sign in</button>
+    <div class="login-foot">Authorized users only. Contact your administrator if you need access.</div>
+  </form>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <header class="top">
+    <div class="logo"><img src="data:image/png;base64,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" alt="Better Practice"></div>
+    <div class="title">Loan Monitoring System<small>SSS &amp; PAG-IBIG FUND</small></div>
+    <div class="spacer"></div>
+    <div class="who">Signed in as <b id="whoName">admin</b> <span class="pill sss" id="roleBadge" style="margin-left:6px"></span></div>
+    <div class="menu">
+      <button class="iconbtn" id="dataMenuBtn" onclick="toggleMenu(event)">Data &#9662;</button>
+      <div class="menu-pop hidden" id="dataMenu">
+        <button onclick="exportData()">&#8681;&nbsp; Export data (JSON)</button>
+        <hr>
+        <button onclick="openPw()">&#128273;&nbsp; Change password</button>
+      </div>
+    </div>
+    <button class="iconbtn" onclick="openPw()">Password</button>
+    <button class="iconbtn" onclick="logout()">Log out</button>
+    <input type="file" id="importCsv" accept=".csv,text/csv" class="hidden" onchange="importDeductions(event)">
+  </header>
+  <nav class="tabs" id="tabs">
+    <button data-v="dashboard" class="active" onclick="go('dashboard')">Dashboard</button>
+    <button data-v="loans" onclick="go('loans')">Loans</button>
+    <button data-v="ledger" onclick="go('ledger')">Payment Ledger</button>
+    <button data-v="post" onclick="go('post')">Post Month</button>
+    <button data-v="reports" onclick="go('reports')">Reports</button>
+    <button data-v="employees" onclick="go('employees')">Employees</button>
+    <button data-v="exceptions" onclick="go('exceptions')">Exceptions</button>
+    <button data-v="users" onclick="go('users')">Users &amp; Roles</button>
+  </nav>
+  <main id="main"></main>
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<div id="modalHost"></div>
+<div id="printArea"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===================== MONTHS ===================== */
+const MONTH_NAMES=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+// Month handling is arithmetic (no fixed range), so any year works, past or future.
+const BASE_YEAR=1990;
+function monthNumFromName(mn){ return MONTH_NAMES.indexOf(String(mn||"").trim().toUpperCase()); }
+function parseMY(s){ const p=String(s||"").trim().split(/\s+/); const mi=monthNumFromName(p[0]); const yr=parseInt(p[1],10); return (mi>=0&&!isNaN(yr))?{mi,yr}:null; }
+const monthIndex=s=>{ const o=parseMY(s); return o?((o.yr-BASE_YEAR)*12+o.mi):-1; };
+function monthLabel(idx){ if(idx==null||idx<0)return ""; const mi=((idx%12)+12)%12; const yr=BASE_YEAR+Math.floor(idx/12); return MONTH_NAMES[mi]+" "+yr; }
+const nextMonth=s=>{ const i=monthIndex(s); return i>=0?monthLabel(i+1):""; };
+function currentMonthName(){const d=new Date();return MONTH_NAMES[d.getMonth()]+" "+d.getFullYear();}
+// Reusable Month + Year picker. Year list spans a wide window and always includes the selected/existing year.
+function yearList(sel){ const now=new Date().getFullYear(); const set=new Set(); for(let y=now-15;y<=now+30;y++)set.add(y); const o=parseMY(sel); if(o)set.add(o.yr); return [...set].sort((a,b)=>a-b); }
+function monthYearPicker(prefix,value,opts){ opts=opts||{}; const o=parseMY(value); const blank=!!opts.allowBlank&&!o; const d=new Date(); const selMi=o?o.mi:d.getMonth(); const selYr=o?o.yr:d.getFullYear(); const oc=opts.onchange?` onchange="${opts.onchange}"`:"";
+  const monOpts=(opts.allowBlank?`<option value=""${blank?" selected":""}>Month</option>`:"")+MONTH_NAMES.map((mn,i)=>`<option value="${i}"${(!blank&&i===selMi)?" selected":""}>${mn.charAt(0)+mn.slice(1).toLowerCase()}</option>`).join("");
+  const yrOpts=(opts.allowBlank?`<option value=""${blank?" selected":""}>Year</option>`:"")+yearList(value).map(y=>`<option value="${y}"${(!blank&&y===selYr)?" selected":""}>${y}</option>`).join("");
+  return `<span class="mywrap"><select id="${prefix}Mon" aria-label="Month"${oc}>${monOpts}</select><select id="${prefix}Yr" aria-label="Year"${oc}>${yrOpts}</select></span>`; }
+function readMonthYear(prefix){ const mv=document.getElementById(prefix+"Mon"),yv=document.getElementById(prefix+"Yr"); if(!mv||!yv||mv.value===""||yv.value==="")return ""; const mi=parseInt(mv.value,10); return isNaN(mi)?"":(MONTH_NAMES[mi]+" "+yv.value); }
+const PAYMENT_TYPES=["REGULAR","ADVANCE","ARREARS CATCH-UP","ADJUSTMENT","FULL SETTLEMENT"];
+const AGENCY_TYPES={SSS:[["SL","SL - Salary Loan"],["CL","CL - Calamity Loan"]],
+  HDMF:[["MPL","MPL - Multi-Purpose Loan"],["CL","CL - Calamity Loan"]]};
+const AGENCIES=[["SSS","SSS"],["HDMF","Pag-IBIG (HDMF)"]];
+
+/* ===================== SUPABASE + STORE ===================== */
+const SUPABASE_URL="https://azaciliompsnpigqxmvz.supabase.co";
+const SUPABASE_KEY="sb_publishable_pgYfBGE4Ta8my7R07Jpl6Q_AQ3dVMhQ";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let STORE={employees:[],loans:[],entries:[]};
+const uid=()=>(crypto.randomUUID?crypto.randomUUID():"id"+Date.now()+Math.random().toString(36).slice(2,8));
+const num=x=>(x===null||x===undefined||x==="")?null:Number(x);
+function rowToLoan(r){return {id:r.id,employee:r.employee,agency:r.agency,loanType:r.loan_type,
+  loanAmount:num(r.loan_amount),monthlyAmort:num(r.monthly_amort),totalPayable:num(r.total_payable),
+  termMonths:(r.term_months==null?null:Number(r.term_months)),firstMonth:r.first_month,reference:r.reference,
+  status:r.status||"active",notes:r.notes};}
+function rowToEntry(r){return {id:r.id,loanId:r.loan_id,applicableMonth:r.applicable_month,orRef:r.or_ref,
+  first15:num(r.first15),second15:num(r.second15),totalRecorded:num(r.total_recorded),
+  paymentType:r.payment_type||"REGULAR",remarks:r.remarks};}
+async function loadData(){
+  const [emp,loans,ents,profs]=await Promise.all([
+    sb.from("employees").select("name,email").order("name"),
+    sb.from("loans").select("*"),
+    sb.from("ledger_entries").select("*"),
+    sb.from("profiles").select("id,full_name,email,role,employee")]);
+  if(loans.error) throw loans.error;
+  if(ents.error) throw ents.error;
+  const L=(loans.data||[]).map(rowToLoan);
+  const E=(ents.data||[]).map(rowToEntry);
+  const empRows=(emp.data||[]);
+  let names=empRows.map(r=>r.name);
+  if(!names.length) names=[...new Set(L.map(l=>l.employee))].sort();
+  const empEmail={}; empRows.forEach(r=>{ if(r.email) empEmail[r.name]=r.email; });
+  STORE={employees:names,empEmail,loans:L,entries:E,profiles:(profs&&profs.data)||[]};
+}
+async function reloadRender(){ try{await loadData();}catch(err){toast("Reload failed: "+(err.message||err));} (CURRENT_ROLE==="member")?renderMember():render(); }
+async function logAudit(action,entity,entity_id){ try{const {data:{user}}=await sb.auth.getUser(); await sb.from("audit_log").insert({actor:user.id,actor_name:CURRENT_USER,action,entity,entity_id:String(entity_id||"")});}catch(e){} }
+function saveStore(){}
+
+/* ===================== DERIVATIONS ===================== */
+function round2(n){return Math.round((n+Number.EPSILON)*100)/100;}
+function halvesOf(e){return (e.first15||0)+(e.second15||0);}
+function hasHalves(e){return typeof e.first15==="number"||typeof e.second15==="number";}
+function appliedOf(e){return (typeof e.totalRecorded==="number")?e.totalRecorded:halvesOf(e);}
+function needsReview(e){return hasHalves(e)&&typeof e.totalRecorded==="number"&&round2(e.totalRecorded)!==round2(halvesOf(e));}
+function varianceOf(e){return needsReview(e)?round2(appliedOf(e)-halvesOf(e)):0;}
+function issueOf(e){ if(!needsReview(e))return""; if(round2(e.totalRecorded)===0)return"Total recorded as 0, halves ignored"; return"Total recorded does not match the two halves"; }
+const loanById=id=>STORE.loans.find(l=>l.id===id);
+function entriesForLoan(l){ return STORE.entries.filter(e=>e.loanId===l.id).sort((a,b)=>monthIndex(a.applicableMonth)-monthIndex(b.applicableMonth)); }
+// The full amount that must be repaid over the life of the loan (principal + interest).
+// Priority: an explicit total, else amortization x term, else the principal as a fallback.
+function obligationOf(l){
+  if(typeof l.totalPayable==="number") return l.totalPayable;
+  if(typeof l.monthlyAmort==="number" && typeof l.termMonths==="number") return round2(l.monthlyAmort*l.termMonths);
+  if(typeof l.loanAmount==="number") return l.loanAmount;
+  return null;
+}
+function loanStats(l){
+  const es=entriesForLoan(l);
+  let totalPaid=0,monthsPaid=0,lastIdx=-1,lastMonth="none",varRows=0;
+  es.forEach(e=>{ const ap=appliedOf(e); totalPaid+=ap; if(ap>0)monthsPaid++;
+    const i=monthIndex(e.applicableMonth); if(i>lastIdx){lastIdx=i;lastMonth=e.applicableMonth;}
+    if(varianceOf(e)!==0)varRows++; });
+  totalPaid=round2(totalPaid);
+  const s={entries:es,totalPaid,monthsPaid,lastMonth,lastIdx,varRows};
+  const ob=obligationOf(l);
+  if(typeof ob==="number"){ s.obligation=ob; s.balance=round2(ob-totalPaid); s.fullyPaid=s.balance<=0; }
+  if(typeof l.monthlyAmort==="number"&&l.firstMonth){
+    const elapsed=Math.max(0,monthIndex(currentMonthName())-monthIndex(l.firstMonth)+1);
+    s.expected=round2(elapsed*l.monthlyAmort); s.advance=round2(totalPaid-s.expected);
+    if(typeof s.balance==="number"&&l.monthlyAmort>0&&s.balance>0){ s.monthsToFull=Math.ceil(s.balance/l.monthlyAmort);
+      const endIdx=monthIndex(currentMonthName())+s.monthsToFull; if(endIdx>=0)s.projectedEnd=monthLabel(endIdx); }
+  }
+  return s;
+}
+function loanState(l){ // one-word lifecycle for display
+  if(l.status==="closed")return "closed";
+  const s=loanStats(l);
+  if(s.fullyPaid)return "fully paid";
+  return "active";
+}
+function missedMonths(l){
+  const es=entriesForLoan(l); if(!l.firstMonth||!es.length)return [];
+  const first=monthIndex(l.firstMonth); let last=-1; const have=new Set();
+  es.forEach(e=>{const i=monthIndex(e.applicableMonth); have.add(i); if(i>last)last=i;});
+  const miss=[]; for(let i=Math.max(first,0);i<=last;i++) if(!have.has(i))miss.push(monthLabel(i));
+  return miss;
+}
+function allExceptions(){
+  return STORE.entries.filter(needsReview).map(e=>({e,l:loanById(e.loanId)})).filter(x=>x.l)
+    .sort((a,b)=> a.l.agency.localeCompare(b.l.agency)||a.l.employee.localeCompare(b.l.employee)||monthIndex(a.e.applicableMonth)-monthIndex(b.e.applicableMonth));
+}
+function loanLabel(l){ return `${l.employee} - ${l.agency==='SSS'?'SSS':'Pag-IBIG'} ${l.loanType}${l.reference?' ('+l.reference+')':''}`; }
+function agencyDisp(a){return a==='SSS'?'SSS':'Pag-IBIG';}
+
+/* ===================== AUTH (Supabase) ===================== */
+let CURRENT_USER="", CURRENT_ROLE="member", CURRENT_EMP=null;
+function caps(){ const r=CURRENT_ROLE; return {admin:r==="admin", loans:r==="admin", employees:r==="admin", pay:(r==="admin"||r==="encoder"), post:(r==="admin"||r==="encoder"), exceptions:(r==="admin"||r==="encoder")}; }
+function need(cap){ if(!caps()[cap]){ toast("You do not have permission for this."); return false; } return true; }
+function togglePw(){ const i=document.getElementById("p"),b=document.getElementById("pwtog"); if(!i)return;
+  const show=i.type==="password"; i.type=show?"text":"password"; b.textContent=show?"Hide":"Show"; b.setAttribute("aria-label",show?"Hide password":"Show password"); }
+async function doLogin(e){
+  e.preventDefault();
+  let email=document.getElementById("u").value.trim(); const p=document.getElementById("p").value;
+  if(email && !email.includes("@")) email=email+"@bploans.local"; // plain usernames map to the internal domain
+  const msg=document.getElementById("loginMsg"); msg.textContent="Signing in...";
+  const {error}=await sb.auth.signInWithPassword({email,password:p});
+  if(error){ msg.textContent=error.message||"Sign in failed."; document.getElementById("p").value=""; return; }
+  await onSignedIn();
+}
+async function onSignedIn(){
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user){ showLogin(); return; }
+  CURRENT_USER=user.email;
+  const {data:prof}=await sb.from("profiles").select("role,employee,full_name").eq("id",user.id).maybeSingle();
+  CURRENT_ROLE=(prof&&prof.role)||"member"; CURRENT_EMP=(prof&&prof.employee)||null;
+  // The employee email is the reference: if one matches this account, it decides the link (overriding any stale one).
+  try{ const {data:linked}=await sb.rpc("link_self_by_email"); if(linked) CURRENT_EMP=linked; }catch(e){}
+  const fname=(prof&&prof.full_name)||"";
+  const displayName=CURRENT_EMP || (fname && fname!==user.email ? fname : "") || user.email;
+  document.getElementById("whoName").textContent=displayName;
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  try{ await loadData(); }catch(err){ toast("Could not load data: "+(err.message||err)); }
+  applyRoleUI();
+  if(CURRENT_ROLE==="member"){ renderMember(); } else { go("dashboard"); }
+}
+function applyRoleUI(){
+  const rb=document.getElementById("roleBadge"); if(rb) rb.textContent=CURRENT_ROLE;
+  const c=caps(), isMember=CURRENT_ROLE==="member";
+  const tabs=document.getElementById("tabs"); if(tabs) tabs.style.display=isMember?"none":"";
+  const dmb=document.getElementById("dataMenuBtn"); if(dmb) dmb.style.display=c.admin?"":"none";
+  const vis={post:c.post, employees:c.employees, exceptions:c.exceptions, users:c.admin};
+  document.querySelectorAll('#tabs button').forEach(b=>{ const v=b.dataset.v; if(v in vis) b.style.display=vis[v]?"":"none"; });
+}
+async function logout(){ try{await sb.auth.signOut();}catch(e){} showLogin(); }
+function showLogin(){ document.getElementById("app").classList.add("hidden"); document.getElementById("login").classList.remove("hidden");
+  document.getElementById("p").value=""; document.getElementById("loginMsg").textContent=""; CURRENT_ROLE="member";
+  const pi=document.getElementById("p"),pb=document.getElementById("pwtog"); if(pi){pi.type="password";} if(pb){pb.textContent="Show";} }
+
+/* ===================== HELPERS ===================== */
+const peso=n=>(n===null||n===undefined||n==="")?"&#8211;":"&#8369;"+Number(n).toLocaleString("en-PH",{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const agencyPill=a=>`<span class="pill ${a==='SSS'?'sss':'hdmf'}">${agencyDisp(a)}</span>`;
+const typePill=t=>`<span class="pill type">${esc(t)}</span>`;
+function toast(msg){ const t=document.getElementById("toast"); t.innerHTML=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2400); }
+function toggleMenu(e){ e.stopPropagation(); document.getElementById("dataMenu").classList.toggle("hidden"); }
+document.addEventListener("click",()=>document.getElementById("dataMenu")?.classList.add("hidden"));
+
+/* ===================== ROUTER ===================== */
+let STATE={view:"dashboard",loanId:null,loanSort:{col:"employee",dir:1}};
+function go(v){ STATE.view=v; STATE.loanId=null;
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("active",b.dataset.v===v)); render(); window.scrollTo(0,0); }
+function openLoan(id){ STATE.view="loanDetail"; STATE.loanId=id; render(); window.scrollTo(0,0); }
+function render(){
+  const m=document.getElementById("main"),v=STATE.view;
+  if(v==="dashboard")m.innerHTML=viewDashboard();
+  else if(v==="loans")m.innerHTML=viewLoans();
+  else if(v==="loanDetail")m.innerHTML=viewLoanDetail();
+  else if(v==="ledger")m.innerHTML=viewLedger();
+  else if(v==="post")m.innerHTML=viewPost();
+  else if(v==="reports")m.innerHTML=viewReports();
+  else if(v==="employees")m.innerHTML=viewEmployees();
+  else if(v==="exceptions")m.innerHTML=viewExceptions();
+  else if(v==="users")m.innerHTML=viewUsers();
+  document.getElementById("foot").innerHTML=`Employee Loan Monitoring System &middot; ${STORE.loans.length} loans, ${STORE.entries.length} payment entries, ${STORE.employees.length} employees &middot; connected to shared database`;
+  bindDynamic();
+}
+
+/* ===================== USERS & ROLES ===================== */
+const ROLE_OPTS=[["admin","Admin (full access)"],["encoder","Encoder (posts payments)"],["viewer","Viewer (read-only, all accounts)"],["member","Employee (self-service, own only)"]];
+const roleLabel=r=>(ROLE_OPTS.find(o=>o[0]===r)||[r,r])[1];
+function viewUsers(){
+  const emps=[...STORE.employees].sort((a,b)=>a.localeCompare(b));
+  const list=(STORE.profiles||[]).slice().sort((a,b)=>String(a.full_name||a.email||"").localeCompare(String(b.full_name||b.email||"")));
+  const rows=list.map(u=>{
+    const roleSel=`<select class="uRole">${ROLE_OPTS.map(o=>`<option value="${o[0]}"${u.role===o[0]?" selected":""}>${o[1]}</option>`).join("")}</select>`;
+    const empSel=`<select class="uEmp"><option value="">(not linked)</option>${emps.map(e=>`<option${u.employee===e?" selected":""}>${esc(e)}</option>`).join("")}</select>`;
+    return `<tr data-uid="${u.id}">
+      <td class="uname" data-label="Name"><b>${esc(u.full_name||"")}</b></td>
+      <td class="uemail muted" data-label="Email / username">${esc(u.email||"")}</td>
+      <td data-label="Role">${roleSel}</td>
+      <td data-label="Linked employee">${empSel}</td>
+      <td class="act" data-label=""><button class="rowbtn" onclick="saveUserRow('${u.id}')">Save</button></td>
+    </tr>`;
+  }).join("");
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Users &amp; Roles</h2>
+      <p>Assign each account's role. <b>Admin</b> has full access and manages users. <b>Encoder</b> posts payments. <b>Viewer</b> is read-only across all accounts (HR/payroll oversight). <b>Employee</b> is self-service and sees only their own loans, so link that person to their name.</p></div></div>
+    <div class="tablewrap"><table class="utable">
+        <thead><tr><th>Name</th><th>Email / username</th><th>Role</th><th>Linked employee</th><th class="act"></th></tr></thead>
+        <tbody>${rows||`<tr><td colspan="5" class="muted" style="padding:16px">No accounts yet. New logins appear here once created.</td></tr>`}</tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">Creating new employee logins from an email and resetting a person's password are handled on the member management screen (coming next). Changing an existing account's role and employee link works here now.</p>
+  </div>`;
+}
+async function saveUserRow(id){
+  if(!need("admin"))return;
+  const tr=document.querySelector(`#main tr[data-uid="${id}"]`); if(!tr)return;
+  const role=tr.querySelector(".uRole").value;
+  const employee=tr.querySelector(".uEmp").value||null;
+  const before=(STORE.profiles||[]).find(p=>p.id===id)||{};
+  const admins=(STORE.profiles||[]).filter(p=>p.role==="admin");
+  if(before.role==="admin" && role!=="admin" && admins.length<=1){
+    toast("This is the only admin. Assign another admin first."); return;
+  }
+  const {error}=await sb.from("profiles").update({role,employee}).eq("id",id);
+  if(error){ toast("Update failed: "+error.message); return; }
+  await logAudit("role_change",`profile:${role}`,id);
+  toast("Saved. "+esc(before.full_name||before.email||"Account")+" is now "+roleLabel(role));
+  await loadData();
+  const me=(STORE.profiles||[]).find(p=>p.email===CURRENT_USER);
+  if(me){ CURRENT_ROLE=me.role||CURRENT_ROLE; CURRENT_EMP=me.employee||null; applyRoleUI(); }
+  render();
+}
+
+/* ===================== DASHBOARD ===================== */
+function viewDashboard(){
+  const L=STORE.loans, stats=L.map(l=>({l,s:loanStats(l)}));
+  const totalPaid=round2(stats.reduce((a,x)=>a+x.s.totalPaid,0));
+  const sssPaid=round2(stats.filter(x=>x.l.agency==="SSS").reduce((a,x)=>a+x.s.totalPaid,0));
+  const hdmfPaid=round2(totalPaid-sssPaid);
+  const borrowers=new Set(L.map(l=>l.employee)).size;
+  const varRows=stats.reduce((a,x)=>a+x.s.varRows,0), needReview=stats.filter(x=>x.s.varRows>0).length;
+  const active=L.filter(l=>l.status==="active").length;
+  const withAmt=L.filter(l=>typeof obligationOf(l)==="number").length;
+  const outstanding=round2(stats.filter(x=>typeof x.s.balance==="number").reduce((a,x)=>a+Math.max(0,x.s.balance),0));
+  const gaps=L.filter(l=>l.status==="active"&&missedMonths(l).length>0).length;
+  const fullyPaid=stats.filter(x=>x.l.status!=="closed"&&x.s.fullyPaid).length;
+  const inArrears=stats.filter(x=>x.l.status==="active"&&!x.s.fullyPaid&&typeof x.s.advance==="number"&&x.s.advance<0);
+  const finishingSoon=stats.filter(x=>x.l.status==="active"&&typeof x.s.monthsToFull==="number"&&x.s.monthsToFull<=3);
+  const noTotal=L.filter(l=>l.status==="active"&&typeof obligationOf(l)!=="number").length;
+
+  const byEmp={}; stats.forEach(x=>byEmp[x.l.employee]=(byEmp[x.l.employee]||0)+x.s.totalPaid);
+  const emps=Object.entries(byEmp).sort((a,b)=>b[1]-a[1]); const maxEmp=Math.max(...emps.map(e=>e[1]),1);
+  const empBars=emps.map(([nm,v])=>`<div class="hbar-row"><div class="nm">${esc(nm)}</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:${(v/maxEmp*100).toFixed(1)}%;background:var(--sss)"></div></div>
+    <div class="amt">${peso(v)}</div></div>`).join("");
+
+  const review=stats.filter(x=>x.s.varRows>0).sort((a,b)=>b.s.varRows-a.s.varRows).map(x=>`
+    <tr class="clickable" onclick="openLoan('${x.l.id}')"><td>${esc(x.l.employee)}</td><td>${agencyPill(x.l.agency)}</td>
+    <td>${typePill(x.l.loanType)}</td><td class="num">${peso(x.s.totalPaid)}</td>
+    <td class="num"><span class="pill warn">${x.s.varRows} row${x.s.varRows>1?'s':''}</span></td></tr>`).join("");
+
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Dashboard</h2><p>Overview of all SSS and Pag-IBIG employee loans on file.</p></div>
+      ${caps().loans?`<button class="btn btn-primary" onclick="editLoan()">+ Add loan</button>`:''}
+      ${caps().post?`<button class="btn btn-ghost" onclick="go('post')">Post a month</button>`:''}</div>
+    <div class="kpis">
+      <div class="kpi accent-brand"><div class="lab">Loans on file</div><div class="val">${L.length}</div><div class="hint">${active} active, ${borrowers} borrowers</div></div>
+      <div class="kpi accent-brand"><div class="lab">Total paid to date</div><div class="val">${peso(totalPaid)}</div><div class="hint">across all loans</div></div>
+      <div class="kpi accent-sss"><div class="lab">SSS paid</div><div class="val">${peso(sssPaid)}</div><div class="hint">${L.filter(l=>l.agency==='SSS').length} loans</div></div>
+      <div class="kpi accent-hdmf"><div class="lab">Pag-IBIG paid</div><div class="val">${peso(hdmfPaid)}</div><div class="hint">${L.filter(l=>l.agency==='HDMF').length} loans</div></div>
+      <div class="kpi accent-warn"><div class="lab">Rows needing review</div><div class="val">${varRows}</div><div class="hint">in ${needReview} loans</div></div>
+      <div class="kpi accent-warn"><div class="lab">Loans with payment gaps</div><div class="val">${gaps}</div><div class="hint">missed months detected</div></div>
+      <div class="kpi accent-brand"><div class="lab">Total remaining balance</div><div class="val">${withAmt?peso(outstanding):'&#8211;'}</div><div class="hint">${withAmt} of ${L.length} loans have a total set</div></div>
+    </div>
+    ${attentionPanel({inArrears,finishingSoon,gapsList:L.filter(l=>l.status==="active"&&missedMonths(l).length>0),needReview:stats.filter(x=>x.s.varRows>0),fullyPaid,noTotal})}
+    <div class="grid2">
+      <div class="card"><h3>Total paid by agency <span class="tag">share of ${peso(totalPaid)}</span></h3>${donutSVG(sssPaid,hdmfPaid)}
+        <div class="legend"><span><span class="dot" style="background:var(--sss)"></span>SSS &nbsp;${peso(sssPaid)}</span>
+        <span><span class="dot" style="background:var(--hdmf)"></span>Pag-IBIG &nbsp;${peso(hdmfPaid)}</span></div></div>
+      <div class="card"><h3>Collections over time <span class="tag">amount applied per month</span></h3>${trendSVG()}</div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Total paid by employee <span class="tag">all loans combined</span></h3>${empBars||'<p class="muted">No data.</p>'}</div>
+      <div class="card"><h3>Loans needing review <span class="tag">recorded totals disagree</span></h3>
+        <div class="tablewrap" style="box-shadow:none;border:none"><table><thead><tr><th>Employee</th><th>Agency</th><th>Type</th><th class="num">Total paid</th><th class="num">Variance</th></tr></thead>
+        <tbody>${review||'<tr><td colspan="5" class="muted">No exceptions. Everything reconciles.</td></tr>'}</tbody></table></div></div>
+    </div>
+  </div>`;
+}
+function attentionPanel(o){
+  const chip=(n,label,tone,onclick)=>`<div class="fact clickable" ${onclick?`onclick="${onclick}"`:''} style="border-top:3px solid ${tone}">
+    <div class="v">${n}</div><div class="l" style="margin-top:2px">${label}</div></div>`;
+  const items=[
+    chip(o.inArrears.length,"In arrears","var(--danger)","go('loans')"),
+    chip(o.finishingSoon.length,"Finishing soon (&le;3 mo)","var(--warn)","go('loans')"),
+    chip(o.gapsList.length,"With missed months","var(--warn)","go('loans')"),
+    chip(o.needReview.length,"Loans needing review","var(--warn)","go('exceptions')"),
+    chip(o.fullyPaid,"Fully paid, can close","var(--ok)","go('loans')"),
+    chip(o.noTotal,"No total set","var(--muted)","bulkAmounts()"),
+  ].join("");
+  const arr=o.inArrears.slice().sort((a,b)=>a.s.advance-b.s.advance).slice(0,6).map(x=>`
+    <tr class="clickable" onclick="openLoan('${x.l.id}')"><td>${esc(x.l.employee)}</td><td>${agencyPill(x.l.agency)}</td><td>${typePill(x.l.loanType)}</td>
+    <td class="num var-neg">${peso(x.s.advance)}</td><td>${esc(x.s.lastMonth!=='none'?x.s.lastMonth:'no payments')}</td></tr>`).join("");
+  return `<div class="card" style="margin-bottom:20px"><h3>Needs attention <span class="tag">loan issues to act on</span></h3>
+    <div class="facts" style="margin:0 0 ${arr?'14px':'0'}">${items}</div>
+    ${arr?`<div class="tablewrap" style="box-shadow:none;border:none"><table><thead><tr><th>Employee</th><th>Agency</th><th>Type</th><th class="num">Arrears</th><th>Paid through</th></tr></thead><tbody>${arr}</tbody></table></div>`:''}
+  </div>`;
+}
+function donutSVG(a,b){ const tot=a+b||1,r=52,c=2*Math.PI*r,aLen=a/tot*c;
+  return `<svg viewBox="0 0 140 140" width="150" height="150" style="display:block;margin:4px auto 0">
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="#eef2f7" stroke-width="20"/>
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--hdmf)" stroke-width="20" stroke-dasharray="${c}" transform="rotate(-90 70 70)"/>
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--sss)" stroke-width="20" stroke-dasharray="${aLen} ${c-aLen}" transform="rotate(-90 70 70)"/>
+    <text x="70" y="66" text-anchor="middle" font-size="12" fill="#5b6577">SSS</text>
+    <text x="70" y="84" text-anchor="middle" font-size="15" font-weight="700" fill="#1a2130">${(a/tot*100).toFixed(0)}%</text></svg>`; }
+function trendSVG(){
+  const map={};
+  STORE.entries.forEach(e=>{const i=monthIndex(e.applicableMonth); if(i<0)return; map[i]=(map[i]||0)+appliedOf(e);});
+  const idxs=Object.keys(map).map(Number).sort((a,b)=>a-b);
+  if(!idxs.length)return '<p class="muted">No payments recorded.</p>';
+  const start=idxs[0],end=idxs[idxs.length-1];
+  const series=[]; for(let i=start;i<=end;i++)series.push({i,v:round2(map[i]||0)});
+  const shown=series.slice(-18);
+  const max=Math.max(...shown.map(p=>p.v),1);
+  const W=520,H=150,pad=24,bw=(W-pad*2)/shown.length;
+  const bars=shown.map((p,k)=>{const h=(p.v/max)*(H-pad*2);const x=pad+k*bw;const y=H-pad-h;
+    return `<rect x="${x+2}" y="${y}" width="${bw-4}" height="${h}" rx="2" fill="var(--sss)"><title>${monthLabel(p.i)}: ${'\u20B1'}${p.v.toLocaleString('en-PH',{minimumFractionDigits:2})}</title></rect>`;}).join("");
+  const labs=shown.map((p,k)=>{ if(shown.length>10&&k%3!==0)return""; const x=pad+k*bw+bw/2;
+    const [mn,yr]=monthLabel(p.i).split(" "); return `<text x="${x}" y="${H-8}" text-anchor="middle" font-size="8.5" fill="#94a3b8">${mn.slice(0,3)} ${yr.slice(2)}</text>`;}).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="xMidYMid meet">
+    <line x1="${pad}" y1="${H-pad}" x2="${W-pad}" y2="${H-pad}" stroke="#e2e7ef"/>${bars}${labs}</svg>
+    <div class="hintline" style="text-align:right">peak month ${'\u20B1'}${max.toLocaleString('en-PH',{minimumFractionDigits:2})}</div>`;
+}
+
+/* ===================== LOANS ===================== */
+function viewLoans(){
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Loan Master File</h2><p>One row per loan. Click a loan to open its ledger. Headers with arrows are sortable.</p></div>
+      ${caps().loans?`<button class="btn btn-ghost" onclick="bulkAmounts()">Set loan amounts</button><button class="btn btn-primary" onclick="editLoan()">+ Add loan</button>`:''}</div>
+    <div class="toolbar">
+      <input type="search" id="fSearch" placeholder="Search employee name...">
+      <select id="fAgency"><option value="">All agencies</option><option value="SSS">SSS</option><option value="HDMF">Pag-IBIG</option></select>
+      <select id="fType"><option value="">All loan types</option><option value="SL">SL</option><option value="MPL">MPL</option><option value="CL">CL</option></select>
+      <select id="fStatus"><option value="active">Active only</option><option value="">All statuses</option><option value="closed">Closed only</option></select>
+      <span class="count" id="loanCount"></span></div>
+    <div class="tablewrap"><table><thead><tr>
+      <th class="sortable" onclick="sortLoans('employee')">Employee ${sortArr('employee')}</th><th>Agency</th><th>Type</th>
+      <th class="num sortable" onclick="sortLoans('loanAmount')">Loan amount ${sortArr('loanAmount')}</th>
+      <th class="num">Monthly amort.</th>
+      <th class="num sortable" onclick="sortLoans('totalPaid')">Total paid ${sortArr('totalPaid')}</th>
+      <th class="num sortable" onclick="sortLoans('balance')">Balance ${sortArr('balance')}</th>
+      <th class="num sortable" onclick="sortLoans('monthsPaid')">Months ${sortArr('monthsPaid')}</th>
+      <th class="num">Review</th><th>Status</th><th class="act">Actions</th>
+    </tr></thead><tbody id="loanRows"></tbody></table></div></div>`;
+}
+function sortArr(col){ return STATE.loanSort.col===col?`<span class="arr">${STATE.loanSort.dir>0?'&#9650;':'&#9660;'}</span>`:'<span class="arr">&#8645;</span>'; }
+function sortLoans(col){ const s=STATE.loanSort; if(s.col===col)s.dir*=-1; else{s.col=col;s.dir=1;} document.getElementById("loanRows").innerHTML=loanRowsHTML(); document.querySelector('#main').innerHTML=viewLoans(); bindDynamic(); }
+function loanRowsHTML(){
+  const q=(document.getElementById("fSearch")?.value||"").toLowerCase();
+  const ag=document.getElementById("fAgency")?.value||"", ty=document.getElementById("fType")?.value||"", st=document.getElementById("fStatus")?.value;
+  let rows=STORE.loans.map(l=>({l,s:loanStats(l)})).filter(x=>
+    (!q||x.l.employee.toLowerCase().includes(q))&&(!ag||x.l.agency===ag)&&(!ty||x.l.loanType===ty)&&(st===""||x.l.status===st||(st===undefined)));
+  const sc=STATE.loanSort.col,dir=STATE.loanSort.dir;
+  rows.sort((a,b)=>{ let av,bv;
+    if(sc==="employee"){av=a.l.employee;bv=b.l.employee;return av.localeCompare(bv)*dir;}
+    if(sc==="loanAmount"){av=a.l.loanAmount??-1;bv=b.l.loanAmount??-1;}
+    else if(sc==="balance"){av=a.s.balance??-1;bv=b.s.balance??-1;}
+    else if(sc==="totalPaid"){av=a.s.totalPaid;bv=b.s.totalPaid;}
+    else if(sc==="monthsPaid"){av=a.s.monthsPaid;bv=b.s.monthsPaid;}
+    else {av=a.l.employee;bv=b.l.employee;return av.localeCompare(bv)*dir;}
+    return (av-bv)*dir; });
+  const el=document.getElementById("loanCount"); if(el)el.textContent=`${rows.length} of ${STORE.loans.length} loans`;
+  return rows.map(({l,s})=>`<tr>
+    <td class="clickable" onclick="openLoan('${l.id}')"><b>${esc(l.employee)}</b>${l.reference?`<div class="hintline">${esc(l.reference)}</div>`:''}</td>
+    <td>${agencyPill(l.agency)}</td><td>${typePill(l.loanType)}</td>
+    <td class="num">${typeof l.loanAmount==="number"?peso(l.loanAmount):'<span class="muted">not set</span>'}</td>
+    <td class="num">${typeof l.monthlyAmort==="number"?peso(l.monthlyAmort):'<span class="muted">&#8211;</span>'}</td>
+    <td class="num">${peso(s.totalPaid)}</td>
+    <td class="num">${typeof s.balance==="number"?peso(s.balance):'<span class="muted">&#8211;</span>'}</td>
+    <td class="num">${s.monthsPaid}</td>
+    <td class="num">${s.varRows>0?`<span class="pill warn">${s.varRows}</span>`:'<span class="pill ok">clear</span>'}</td>
+    <td>${l.status==="closed"?'<span class="pill closed">closed</span>':(s.fullyPaid?'<span class="pill ok">fully paid</span>':'<span class="pill sss">active</span>')}</td>
+    <td class="act"><button class="rowbtn" onclick="openLoan('${l.id}')">Open</button>
+      ${caps().loans?`<button class="rowbtn" onclick="editLoan('${l.id}')">Edit</button><button class="rowbtn del" onclick="deleteLoan('${l.id}')">Delete</button>`:''}</td>
+  </tr>`).join("")||'<tr><td colspan="11" class="muted" style="padding:18px">No loans match your filters.</td></tr>';
+}
+
+/* ===================== LOAN DETAIL ===================== */
+function viewLoanDetail(){
+  const l=loanById(STATE.loanId);
+  if(!l)return `<div class="view"><button class="backlink" onclick="go('loans')">&lsaquo; Back to loans</button><p>Loan not found.</p></div>`;
+  const s=loanStats(l); let run=0;
+  const rows=s.entries.map(e=>{ run+=appliedOf(e); const v=varianceOf(e);
+    const vcell=(v===0)?'<span class="muted">&#8211;</span>':`<span class="${v<0?'var-neg':'var-pos'}">${v>0?'+':''}${peso(v)}</span>`;
+    return `<tr><td class="num">${monthIndex(e.applicableMonth)>=0?monthIndex(e.applicableMonth)+1:''}</td><td>${esc(e.applicableMonth)}</td>
+      <td class="num">${typeof e.first15==="number"?peso(e.first15):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num">${typeof e.second15==="number"?peso(e.second15):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num">${typeof e.totalRecorded==="number"?peso(e.totalRecorded):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num"><b>${peso(appliedOf(e))}</b></td><td class="num">${vcell}</td><td class="num">${peso(round2(run))}</td>
+      <td>${esc(nextMonth(e.applicableMonth))}</td><td class="muted">${esc(e.paymentType||'')}</td>
+      <td class="act"><button class="rowbtn" onclick="printPayment('${e.id}')">Receipt</button>${caps().pay?`<button class="rowbtn" onclick="editEntry('${e.id}')">Edit</button><button class="rowbtn del" onclick="deleteEntry('${e.id}')">Delete</button>`:''}</td></tr>`;}).join("");
+  const missed=missedMonths(l);
+  const notice=s.varRows>0?`<div class="notice"><b>${s.varRows} payment row${s.varRows>1?'s':''} need review.</b> The recorded total disagrees with the two halves, so figures are provisional until settled.</div>`:"";
+  const missNotice=missed.length?`<div class="notice"><b>${missed.length} missed month${missed.length>1?'s':''} between the first amortization month and the last recorded one:</b> ${missed.slice(0,12).map(esc).join(", ")}${missed.length>12?", ...":""}. Record or confirm these deductions.</div>`:"";
+  const amtNotice=(typeof s.obligation!=="number")?`<div class="notice info">No total-to-pay is set, so the remaining balance cannot be computed. Click <b>Edit loan</b> and enter the total amount to be paid (or the monthly amortization and the loan term).</div>`:"";
+  const paidNotice=(s.fullyPaid)?`<div class="notice" style="background:#e7f7ef;border-color:#b6e6cd;color:#065f46"><b>This loan is fully paid.</b> Total paid has reached the total amount due. You can mark it closed to move it out of the active list.</div>`:"";
+  const facts=[["Loan amount granted",typeof l.loanAmount==="number"?peso(l.loanAmount):"not set"],
+    ["Total to be paid",typeof s.obligation==="number"?peso(s.obligation):"not set"],
+    ["Monthly amortization",typeof l.monthlyAmort==="number"?peso(l.monthlyAmort):"&#8211;"],
+    ["Total paid to date",peso(s.totalPaid)],
+    ["Remaining balance to pay",typeof s.balance==="number"?`<span class="${s.balance>0?'':'var-pos'}">${peso(s.balance)}</span>`:"&#8211;"],
+    ["Months paid",s.monthsPaid],["Paid through",s.lastMonth!=="none"?esc(s.lastMonth):"none"]];
+  if(typeof s.expected==="number"){facts.push(["Expected to date",peso(s.expected)]);facts.push(["Advance / (arrears)",`<span class="${s.advance<0?'var-neg':'var-pos'}">${peso(s.advance)}</span>`]);}
+  if(typeof s.monthsToFull==="number")facts.push(["Est. months to full",s.monthsToFull]);
+  if(s.projectedEnd)facts.push(["Projected payoff",esc(s.projectedEnd)]);
+  const factsHTML=facts.map(f=>`<div class="fact"><div class="l">${f[0]}</div><div class="v">${f[1]}</div></div>`).join("");
+  return `<div class="view">
+    <button class="backlink" onclick="go('loans')">&lsaquo; Back to loans</button>
+    <div class="detail-head"><h2>${esc(l.employee)}</h2> ${agencyPill(l.agency)} ${typePill(l.loanType)} ${l.status==="closed"?'<span class="pill closed">closed</span>':(s.fullyPaid?'<span class="pill ok">fully paid</span>':'')}
+      <div class="detail-actions">
+        <button class="btn btn-ghost btn-sm" onclick="printStatement('${esc(l.employee).replace(/'/g,"\\'")}')">Print statement</button>
+        ${caps().pay?`<button class="btn btn-ghost btn-sm" onclick="editEntry(null,'${l.id}')">+ Record payment</button>`:''}
+        ${caps().loans?`<button class="btn btn-ghost btn-sm" onclick="toggleStatus('${l.id}')">${l.status==="closed"?"Reopen":"Mark paid off"}</button><button class="btn btn-ghost btn-sm" onclick="editLoan('${l.id}')">Edit loan</button><button class="btn btn-danger btn-sm" onclick="deleteLoan('${l.id}')">Delete</button>`:''}</div></div>
+    <p class="muted">First amortization month: ${esc(l.firstMonth||'not set')}${l.reference?' &middot; Ref: '+esc(l.reference):''}</p>
+    ${paidNotice}${notice}${missNotice}${amtNotice}
+    <div class="facts">${factsHTML}</div>
+    ${l.notes?`<div class="notice info"><b>HR note:</b> ${esc(l.notes)}</div>`:""}
+    <div class="card" style="padding:0"><div style="padding:16px 18px 4px"><h3 style="margin:0">Payment ledger <span class="tag">${s.entries.length} month${s.entries.length!==1?'s':''} recorded</span></h3></div>
+    <div class="tablewrap" style="box-shadow:none;border:none"><table><thead><tr><th class="num">#</th><th>Applicable month</th><th class="num">1st-15th</th><th class="num">16th-30th</th>
+      <th class="num">Total rec.</th><th class="num">Applied</th><th class="num">Variance</th><th class="num">Running</th><th>Due month</th><th>Type</th><th class="act">Actions</th></tr></thead>
+    <tbody>${rows||'<tr><td colspan="11" class="muted" style="padding:16px">No payments recorded yet.</td></tr>'}</tbody></table></div></div>
+  </div>`;
+}
+async function toggleStatus(id){ if(!need('loans'))return; const l=loanById(id); const ns=l.status==="closed"?"active":"closed";
+  const {error}=await sb.from("loans").update({status:ns}).eq("id",id); if(error){toast("Update failed: "+error.message);return;}
+  toast(ns==="closed"?"Loan marked paid off":"Loan reopened"); await reloadRender(); }
+
+/* ===================== PAYMENT LEDGER ===================== */
+function viewLedger(){
+  const emps=[...new Set(STORE.loans.map(l=>l.employee))].sort();
+  const years=[...new Set(STORE.entries.map(e=>parseAppMonth(e.applicableMonth).year).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Payment Ledger</h2><p>Every monthly deduction across both agencies. Amount applied is the recorded total when present, otherwise the two halves added together.</p></div>
+      ${caps().pay?`<button class="btn btn-primary" onclick="editEntry()">+ Record payment</button>`:''}</div>
+    <div class="toolbar"><input type="search" id="gSearch" placeholder="Search employee or month...">
+      <select id="gAgency"><option value="">All agencies</option><option value="SSS">SSS</option><option value="HDMF">Pag-IBIG</option></select>
+      <select id="gEmp"><option value="">All employees</option>${emps.map(e=>`<option>${esc(e)}</option>`).join("")}</select>
+      <select id="gMonth"><option value="">All months</option>${MONTH_NAMES.map(mn=>`<option value="${mn}">${mn.charAt(0)+mn.slice(1).toLowerCase()}</option>`).join("")}</select>
+      <select id="gYear"><option value="">All years</option>${years.map(y=>`<option value="${y}">${y}</option>`).join("")}</select>
+      <label style="font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px"><input type="checkbox" id="gVar"> variance only</label>
+      <span class="count" id="gCount"></span></div>
+    <div class="tablewrap"><table><thead><tr><th>Employee</th><th>Agency</th><th>Type</th><th>Applicable month</th><th class="num">1st-15th</th><th class="num">16th-30th</th>
+      <th class="num">Total rec.</th><th class="num">Applied</th><th class="num">Variance</th><th>Due month</th><th>Type</th><th class="act">Actions</th></tr></thead><tbody id="gRows"></tbody></table></div></div>`;
+}
+function ledgerRowsHTML(){
+  const q=(document.getElementById("gSearch")?.value||"").toLowerCase();
+  const ag=document.getElementById("gAgency")?.value||"",emp=document.getElementById("gEmp")?.value||"",varonly=document.getElementById("gVar")?.checked;
+  const fMonth=document.getElementById("gMonth")?.value||"",fYear=document.getElementById("gYear")?.value||"";
+  let rows=STORE.entries.map(e=>({e,l:loanById(e.loanId)})).filter(x=>x.l).filter(({e,l})=>{
+    const hay=(l.employee+" "+(e.applicableMonth||"")).toLowerCase();
+    const pm=parseAppMonth(e.applicableMonth);
+    return (!q||hay.includes(q))&&(!ag||l.agency===ag)&&(!emp||l.employee===emp)&&(!varonly||varianceOf(e)!==0)
+      &&(!fMonth||pm.mon===fMonth)&&(!fYear||pm.year===fYear);
+  }).sort((a,b)=> a.l.employee.localeCompare(b.l.employee)||a.l.agency.localeCompare(b.l.agency)||monthIndex(a.e.applicableMonth)-monthIndex(b.e.applicableMonth));
+  const el=document.getElementById("gCount"); if(el)el.textContent=`${rows.length} entries`;
+  return rows.map(({e,l})=>{ const v=varianceOf(e);
+    const vcell=(v===0)?'<span class="muted">&#8211;</span>':`<span class="${v<0?'var-neg':'var-pos'}">${v>0?'+':''}${peso(v)}</span>`;
+    return `<tr><td>${esc(l.employee)}</td><td>${agencyPill(l.agency)}</td><td>${typePill(l.loanType)}</td><td>${esc(e.applicableMonth)}</td>
+      <td class="num">${typeof e.first15==="number"?peso(e.first15):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num">${typeof e.second15==="number"?peso(e.second15):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num">${typeof e.totalRecorded==="number"?peso(e.totalRecorded):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num"><b>${peso(appliedOf(e))}</b></td><td class="num">${vcell}</td><td>${esc(nextMonth(e.applicableMonth))}</td><td class="muted">${esc(e.paymentType||'')}</td>
+      <td class="act"><button class="rowbtn" onclick="printPayment('${e.id}')">Receipt</button>${caps().pay?`<button class="rowbtn" onclick="editEntry('${e.id}')">Edit</button><button class="rowbtn del" onclick="deleteEntry('${e.id}')">Delete</button>`:''}</td></tr>`;}).join("")||'<tr><td colspan="12" class="muted" style="padding:18px">No entries match.</td></tr>';
+}
+
+/* ===================== POST MONTH (batch) ===================== */
+function viewPost(){
+  const active=STORE.loans.filter(l=>l.status==="active").sort((a,b)=>a.employee.localeCompare(b.employee)||a.agency.localeCompare(b.agency));
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Post a Month</h2><p>Record one month of deductions for many loans at once. Fill only the loans that were deducted; blank rows are skipped. Loans already posted for the chosen month are locked.</p></div></div>
+    <div class="toolbar">
+      <label style="font-size:12.5px;color:var(--muted)">Applicable month
+        ${monthYearPicker('pM',currentMonthName(),{onchange:'renderPostRows()'})}</label>
+      <label style="font-size:12.5px;color:var(--muted)">Payment type
+        <select id="pType">${PAYMENT_TYPES.map(t=>`<option>${t}</option>`).join("")}</select></label>
+      <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost" onclick="downloadTemplate()">Download template</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('importCsv').click()">Import CSV</button>
+        <button class="btn btn-primary" onclick="postMonth()">Post filled rows</button></div></div>
+    <div class="tablewrap"><table class="gridtable"><thead><tr>
+      <th>Employee</th><th>Agency</th><th>Type</th><th class="num">Monthly amort.</th><th class="num" style="width:120px">1st-15th</th>
+      <th class="num" style="width:120px">16th-30th</th><th class="num" style="width:130px">Or total</th><th style="width:120px">Status</th>
+    </tr></thead><tbody id="postRows"></tbody></table></div>
+    <div class="form-msg ok" id="postMsg" style="margin-top:10px"></div></div>`;
+}
+function renderPostRows(){
+  const month=readMonthYear('pM')||currentMonthName();
+  const active=STORE.loans.filter(l=>l.status==="active").sort((a,b)=>a.employee.localeCompare(b.employee)||a.agency.localeCompare(b.agency));
+  document.getElementById("postRows").innerHTML=active.map(l=>{
+    const existing=STORE.entries.find(e=>e.loanId===l.id&&e.applicableMonth===month);
+    const locked=!!existing;
+    return `<tr data-loan="${l.id}">
+      <td>${esc(l.employee)}${l.reference?`<div class="hintline">${esc(l.reference)}</div>`:''}</td><td>${agencyPill(l.agency)}</td><td>${typePill(l.loanType)}</td>
+      <td class="num">${typeof l.monthlyAmort==="number"?peso(l.monthlyAmort):'<span class="muted">&#8211;</span>'}</td>
+      <td><input type="text" inputmode="decimal" class="pH1" ${locked?'disabled':''} placeholder="${typeof l.monthlyAmort==='number'?(l.monthlyAmort/2).toFixed(2):'0.00'}"></td>
+      <td><input type="text" inputmode="decimal" class="pH2" ${locked?'disabled':''} placeholder="${typeof l.monthlyAmort==='number'?(l.monthlyAmort/2).toFixed(2):'0.00'}"></td>
+      <td><input type="text" inputmode="decimal" class="pTot" ${locked?'disabled':''} placeholder="optional"></td>
+      <td>${locked?`<span class="pill ok">posted ${peso(appliedOf(existing))}</span>`:'<span class="muted">not posted</span>'}</td></tr>`;
+  }).join("")||'<tr><td colspan="8" class="muted" style="padding:16px">No active loans.</td></tr>';
+}
+async function postMonth(){
+  if(!need('pay'))return;
+  const month=readMonthYear('pM')||currentMonthName(), ptype=document.getElementById("pType").value;
+  const rows=[];
+  document.querySelectorAll("#postRows tr[data-loan]").forEach(tr=>{
+    const h1i=tr.querySelector(".pH1"), h2i=tr.querySelector(".pH2"), toti=tr.querySelector(".pTot");
+    if(!h1i||h1i.disabled)return;
+    const pn=v=>{v=(v||"").trim();if(v==="")return null;const n=Number(v.replace(/,/g,""));return isNaN(n)?null:round2(n);};
+    const h1=pn(h1i.value),h2=pn(h2i.value),tot=pn(toti.value);
+    if(h1===null&&h2===null&&tot===null)return;
+    rows.push({loan_id:tr.dataset.loan,applicable_month:month,or_ref:null,first15:h1,second15:h2,total_recorded:tot,payment_type:ptype,remarks:"posted via monthly batch"});
+  });
+  if(!rows.length){ document.getElementById("postMsg").textContent="Nothing to post. Fill at least one row."; document.getElementById("postMsg").classList.remove("ok"); return; }
+  const {error}=await sb.from("ledger_entries").insert(rows); if(error){ const pm=document.getElementById("postMsg"); pm.classList.remove("ok"); pm.textContent="Post failed: "+error.message; return; }
+  logAudit("post_month","ledger",month); toast(`Posted ${rows.length} payment${rows.length>1?'s':''} for ${month}`); await reloadRender();
+}
+
+/* ===================== IMPORT / EXPORT DEDUCTIONS ===================== */
+function csvCell(v){ v=String(v==null?"":v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+function downloadTemplate(){
+  if(!need("pay"))return;
+  const month=readMonthYear('pM')||currentMonthName();
+  const active=STORE.loans.filter(l=>l.status==="active").sort((a,b)=>a.employee.localeCompare(b.employee)||a.agency.localeCompare(b.agency));
+  const head=["Employee","Agency","LoanType","Reference","Month","First15","Second15","Total","PaymentType"];
+  const lines=[head.join(",")];
+  active.forEach(l=>lines.push([csvCell(l.employee),l.agency,l.loanType,csvCell(l.reference||""),month,"","","","REGULAR"].map(csvCell).join(",")));
+  const blob=new Blob([lines.join("\r\n")],{type:"text/csv"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="deduction-template-"+month.replace(/\s+/g,"-")+".csv"; a.click(); URL.revokeObjectURL(a.href);
+  toast("Template downloaded, fill the amount columns then Import CSV");
+}
+function parseCSV(text){
+  const rows=[]; let i=0,f="",row=[],q=false; text=text.replace(/\r\n/g,"\n").replace(/\r/g,"\n");
+  while(i<text.length){ const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){f+='"';i+=2;continue;} q=false;i++;continue;} f+=c;i++;continue; }
+    if(c==='"'){q=true;i++;continue;}
+    if(c===','){row.push(f);f="";i++;continue;}
+    if(c==='\n'){row.push(f);rows.push(row);row=[];f="";i++;continue;}
+    f+=c;i++; }
+  if(f!==""||row.length){row.push(f);rows.push(row);}
+  return rows.filter(r=>r.some(x=>x.trim()!==""));
+}
+function importDeductions(ev){
+  if(!need("pay"))return;
+  const file=ev.target.files[0]; if(!file)return; const rd=new FileReader();
+  rd.onload=()=>{ ev.target.value="";
+    const rows=parseCSV(rd.result); if(rows.length<2){toast("That file has no data rows");return;}
+    const hdr=rows[0].map(h=>h.trim().toLowerCase().replace(/[^a-z0-9]/g,""));
+    const col=n=>hdr.indexOf(n);
+    const ci={emp:col("employee"),ag:col("agency"),lt:col("loantype"),ref:col("reference"),mo:col("month"),h1:col("first15"),h2:col("second15"),tot:col("total"),pt:col("paymenttype")};
+    if(ci.emp<0||ci.mo<0){toast("File needs at least Employee and Month columns");return;}
+    const pn=v=>{v=String(v||"").replace(/[₱,\s]/g,"").trim(); if(v==="")return null; const n=Number(v); return isNaN(n)?null:round2(n);};
+    const normAg=a=>{a=String(a||"").toUpperCase(); return (a.includes("PAG")||a==="HDMF")?"HDMF":"SSS";};
+    const items=[];
+    for(let k=1;k<rows.length;k++){ const r=rows[k];
+      const emp=(r[ci.emp]||"").trim(); if(!emp)continue;
+      const ag=normAg(r[ci.ag]); const lt=(r[ci.lt]||"").trim().toUpperCase();
+      const ref=ci.ref>=0?(r[ci.ref]||"").trim():"";
+      const mo=(r[ci.mo]||"").trim().toUpperCase();
+      const h1=pn(r[ci.h1]),h2=pn(r[ci.h2]),tot=pn(r[ci.tot]);
+      const pt=ci.pt>=0?((r[ci.pt]||"").trim().toUpperCase()||"REGULAR"):"REGULAR";
+      if(h1===null&&h2===null&&tot===null)continue;
+      let loan=STORE.loans.find(l=>l.employee.toLowerCase()===emp.toLowerCase()&&l.agency===ag&&l.loanType===lt&&(ref?(l.reference||"").toLowerCase()===ref.toLowerCase():true));
+      if(!loan) loan=STORE.loans.find(l=>l.employee.toLowerCase()===emp.toLowerCase()&&l.agency===ag&&l.loanType===lt);
+      let status,loanId=null;
+      if(monthIndex(mo)<0) status="bad month";
+      else if(!loan) status="no matching loan";
+      else { loanId=loan.id; status=STORE.entries.find(e=>e.loanId===loan.id&&e.applicableMonth===mo)?"already posted":"will post"; }
+      items.push({emp,ag,lt,mo,h1,h2,tot,pt,status,loanId});
+    }
+    previewImport(items);
+  };
+  rd.readAsText(file);
+}
+function previewImport(items){
+  const willPost=items.filter(x=>x.status==="will post");
+  const skipped=items.filter(x=>x.status==="already posted").length;
+  const bad=items.filter(x=>x.status==="no matching loan"||x.status==="bad month").length;
+  window.__importQueue=willPost;
+  const body=items.map(x=>{ const applied=(typeof x.tot==="number")?x.tot:round2((x.h1||0)+(x.h2||0));
+    const tone=x.status==="will post"?"ok":(x.status==="already posted"?"none":"warn");
+    return `<tr><td>${esc(x.emp)}</td><td>${x.ag==='SSS'?'SSS':'Pag-IBIG'} ${esc(x.lt)}</td><td>${esc(x.mo)}</td><td class="num">${peso(applied)}</td><td><span class="pill ${tone}">${x.status}</span></td></tr>`;}).join("");
+  modal(`<h3>Import preview</h3>
+    <p class="hintline" style="margin-bottom:10px"><b>${willPost.length}</b> will be posted &middot; ${skipped} already posted (skipped) &middot; ${bad} could not be matched. Matching uses employee name, agency, and loan type.</p>
+    <div class="tablewrap" style="box-shadow:none;max-height:50vh"><table><thead><tr><th>Employee</th><th>Loan</th><th>Month</th><th class="num">Amount</th><th>Status</th></tr></thead><tbody>${body||'<tr><td colspan="5" class="muted" style="padding:14px">No rows with amounts found.</td></tr>'}</tbody></table></div>
+    <div class="form-msg" id="impMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="commitImport()" ${willPost.length?'':'disabled'}>Post ${willPost.length} payment${willPost.length!==1?'s':''}</button></div>`,"wide");
+}
+async function commitImport(){
+  if(!need('pay'))return;
+  const q=window.__importQueue||[]; if(!q.length){ closeModal(); return; }
+  const rows=q.map(x=>({loan_id:x.loanId,applicable_month:x.mo,or_ref:null,first15:x.h1,second15:x.h2,total_recorded:x.tot,payment_type:x.pt,remarks:"imported from spreadsheet"}));
+  const {error}=await sb.from("ledger_entries").insert(rows); if(error){ toast("Import failed: "+error.message); return; }
+  window.__importQueue=null; logAudit("import","ledger",rows.length); closeModal(); toast(`Imported ${rows.length} payment${rows.length!==1?'s':''}`); await reloadRender();
+}
+
+/* ===================== REPORTS ===================== */
+function viewReports(){
+  const emps=[...new Set(STORE.loans.map(l=>l.employee))].sort();
+  return `<div class="view">
+    <div class="page-head"><div class="ht"><h2>Reports</h2><p>Monthly remittance summary and printable statements of account.</p></div></div>
+    <div class="grid2">
+      <div class="card"><h3>Monthly remittance summary <span class="tag">what to remit</span></h3>
+        <div class="toolbar" style="margin-bottom:10px"><label style="font-size:12.5px;color:var(--muted)">Applicable month
+          ${monthYearPicker('rM',currentMonthName(),{onchange:'renderRemit()'})}</label>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="printRemit()">Print</button></div>
+        <div id="remitBox"></div></div>
+      <div class="card"><h3>Statement of account <span class="tag">per employee</span></h3>
+        <p class="hintline" style="margin-bottom:10px">A printable one-page history of all of an employee's loans, payments, and balances.</p>
+        <div class="tablewrap" style="box-shadow:none;border:none"><table><thead><tr><th>Employee</th><th class="num">Loans</th><th class="act"></th></tr></thead>
+        <tbody>${emps.map(nm=>`<tr><td>${esc(nm)}</td><td class="num">${STORE.loans.filter(l=>l.employee===nm).length}</td>
+          <td class="act"><button class="rowbtn" onclick="printStatement('${esc(nm).replace(/'/g,"\\'")}')">Print statement</button></td></tr>`).join("")}</tbody></table></div></div>
+    </div></div>`;
+}
+function remitData(month){
+  const rows=STORE.entries.filter(e=>e.applicableMonth===month).map(e=>({e,l:loanById(e.loanId)})).filter(x=>x.l);
+  const sss=rows.filter(x=>x.l.agency==="SSS"), hdmf=rows.filter(x=>x.l.agency==="HDMF");
+  const sum=arr=>round2(arr.reduce((a,x)=>a+appliedOf(x.e),0));
+  return {rows,sss,hdmf,sssTot:sum(sss),hdmfTot:sum(hdmf),grand:sum(rows)};
+}
+function renderRemit(){
+  const month=readMonthYear('rM')||currentMonthName(), d=remitData(month);
+  document.getElementById("remitBox").innerHTML=`
+    <div class="kpis" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:12px">
+      <div class="kpi accent-sss"><div class="lab">SSS</div><div class="val" style="font-size:18px">${peso(d.sssTot)}</div><div class="hint">${d.sss.length} loans</div></div>
+      <div class="kpi accent-hdmf"><div class="lab">Pag-IBIG</div><div class="val" style="font-size:18px">${peso(d.hdmfTot)}</div><div class="hint">${d.hdmf.length} loans</div></div>
+      <div class="kpi accent-brand"><div class="lab">Total</div><div class="val" style="font-size:18px">${peso(d.grand)}</div><div class="hint">${d.rows.length} loans</div></div></div>
+    <div class="tablewrap" style="box-shadow:none;border:none;max-height:260px"><table><thead><tr><th>Employee</th><th>Agency</th><th>Type</th><th class="num">Applied</th></tr></thead>
+    <tbody>${d.rows.sort((a,b)=>a.l.agency.localeCompare(b.l.agency)||a.l.employee.localeCompare(b.l.employee)).map(x=>`<tr><td>${esc(x.l.employee)}</td><td>${agencyPill(x.l.agency)}</td><td>${typePill(x.l.loanType)}</td><td class="num">${peso(appliedOf(x.e))}</td></tr>`).join("")||'<tr><td colspan="4" class="muted" style="padding:14px">No deductions recorded for this month.</td></tr>'}</tbody></table></div>`;
+}
+function printRemit(){
+  const month=readMonthYear('rM')||currentMonthName(), d=remitData(month);
+  const body=agency=>d.rows.filter(x=>x.l.agency===agency).sort((a,b)=>a.l.employee.localeCompare(b.l.employee))
+    .map(x=>`<tr><td>${esc(x.l.employee)}</td><td>${x.l.loanType}</td><td class="num">${peso(appliedOf(x.e))}</td></tr>`).join("")||'<tr><td colspan="3">None</td></tr>';
+  printDoc(`Loan Remittance Summary`,`<div class="ph">Applicable month: ${esc(month)} &middot; Payable ${esc(nextMonth(month))} &middot; Generated ${new Date().toLocaleDateString('en-PH')}</div>
+    <h2>SSS &mdash; Total ${peso(d.sssTot)}</h2><table><thead><tr><th>Employee</th><th>Type</th><th class="num">Amount</th></tr></thead><tbody>${body("SSS")}</tbody></table>
+    <h2>Pag-IBIG (HDMF) &mdash; Total ${peso(d.hdmfTot)}</h2><table><thead><tr><th>Employee</th><th>Type</th><th class="num">Amount</th></tr></thead><tbody>${body("HDMF")}</tbody></table>
+    <p style="font-size:13px"><b>Grand total to remit: ${peso(d.grand)}</b></p>
+    <div class="sig">Prepared by: ______________________________ &nbsp;&nbsp; Checked by: ______________________________</div>`);
+}
+function printStatement(name){
+  const loans=STORE.loans.filter(l=>l.employee===name);
+  let html=`<div class="ph">Employee: ${esc(name)} &middot; Generated ${new Date().toLocaleDateString('en-PH')}</div>`;
+  if(!loans.length)html+="<p>No loans on file.</p>";
+  loans.forEach(l=>{ const s=loanStats(l); let run=0;
+    html+=`<h2>${agencyDisp(l.agency)} ${esc(l.loanType)}${l.reference?' ('+esc(l.reference)+')':''}</h2>
+      <p style="font-size:11px;margin:0 0 6px">Total to pay: ${typeof s.obligation==="number"?peso(s.obligation):"not set"} &middot; Monthly amortization: ${typeof l.monthlyAmort==="number"?peso(l.monthlyAmort):"n/a"} &middot; Total paid: ${peso(s.totalPaid)} &middot; Remaining balance: ${typeof s.balance==="number"?peso(s.balance):"n/a"} &middot; Paid through: ${s.lastMonth!=="none"?esc(s.lastMonth):"none"}${s.fullyPaid?" &middot; FULLY PAID":""}</p>
+      <table><thead><tr><th>Month</th><th class="num">1st-15th</th><th class="num">16th-30th</th><th class="num">Applied</th><th class="num">Running</th><th>Type</th></tr></thead><tbody>`;
+    s.entries.forEach(e=>{ run+=appliedOf(e);
+      html+=`<tr><td>${esc(e.applicableMonth)}</td><td class="num">${typeof e.first15==="number"?peso(e.first15):"&#8211;"}</td><td class="num">${typeof e.second15==="number"?peso(e.second15):"&#8211;"}</td><td class="num">${peso(appliedOf(e))}</td><td class="num">${peso(round2(run))}</td><td>${esc(e.paymentType||"")}</td></tr>`;});
+    html+=`</tbody></table>`; });
+  html+=`<div class="sig">Certified correct: ______________________________</div>`;
+  printDoc("Statement of Account",html);
+}
+function printPayment(id){
+  const e=STORE.entries.find(x=>x.id===id); if(!e)return; const l=loanById(e.loanId); if(!l)return;
+  let run=0; entriesForLoan(l).forEach(x=>{ if(monthIndex(x.applicableMonth)<=monthIndex(e.applicableMonth)) run+=appliedOf(x); });
+  run=round2(run);
+  const info=`<table><tbody>
+    <tr><td><b>Employee</b></td><td>${esc(l.employee)}</td></tr>
+    <tr><td><b>Agency</b></td><td>${agencyDisp(l.agency)}</td></tr>
+    <tr><td><b>Loan type</b></td><td>${esc(l.loanType)}${l.reference?' ('+esc(l.reference)+')':''}</td></tr>
+    <tr><td><b>Applicable month</b></td><td>${esc(e.applicableMonth)}</td></tr>
+    <tr><td><b>Payment due month</b></td><td>${esc(nextMonth(e.applicableMonth))}</td></tr>
+    <tr><td><b>Payment type</b></td><td>${esc(e.paymentType||'')}</td></tr>
+    <tr><td><b>OR / Ref no.</b></td><td>${esc(e.orRef||'-')}</td></tr>
+  </tbody></table>`;
+  const ob=obligationOf(l);
+  const bal=(typeof ob==="number")?`<tr><td>Total amount to be paid</td><td class="num">${peso(ob)}</td></tr>
+    <tr><td>Remaining balance after this month</td><td class="num">${peso(round2(ob-run))}</td></tr>`:"";
+  const amt=`<table><thead><tr><th>Item</th><th class="num">Amount</th></tr></thead><tbody>
+    <tr><td>1st - 15th deduction</td><td class="num">${typeof e.first15==="number"?peso(e.first15):'-'}</td></tr>
+    <tr><td>16th - 30th deduction</td><td class="num">${typeof e.second15==="number"?peso(e.second15):'-'}</td></tr>
+    <tr><td>Total as recorded</td><td class="num">${typeof e.totalRecorded==="number"?peso(e.totalRecorded):'-'}</td></tr>
+    <tr><td><b>Amount paid this month</b></td><td class="num"><b>${peso(appliedOf(e))}</b></td></tr>
+    <tr><td>Total paid through ${esc(e.applicableMonth)}</td><td class="num">${peso(run)}</td></tr>
+    ${bal}
+  </tbody></table>`;
+  printDoc("Proof of Loan Payment",`<div class="ph">${esc(l.employee)} &middot; ${agencyDisp(l.agency)} ${esc(l.loanType)} &middot; ${esc(e.applicableMonth)} &middot; Generated ${new Date().toLocaleDateString('en-PH')}</div>${info}${amt}<div class="sig">Received / verified by: ______________________________</div>`);
+}
+function printDoc(title,inner){
+  document.getElementById("printArea").innerHTML=`<div class="print-doc"><h1>${title}</h1>${inner}</div>`;
+  window.print(); setTimeout(()=>{document.getElementById("printArea").innerHTML="";},400);
+}
+
+/* ===================== EMPLOYEES ===================== */
+function viewEmployees(){
+  const rows=STORE.employees.slice().sort().map(nm=>{
+    const loans=STORE.loans.filter(l=>l.employee===nm);
+    const active=loans.filter(l=>l.status==="active");
+    let paid=0,remaining=0,deduction=0,hasBal=false;
+    loans.forEach(l=>{ const s=loanStats(l); paid+=s.totalPaid; if(typeof s.balance==="number"){remaining+=Math.max(0,s.balance);hasBal=true;} });
+    active.forEach(l=>{ if(typeof l.monthlyAmort==="number") deduction+=l.monthlyAmort; });
+    paid=round2(paid); remaining=round2(remaining); deduction=round2(deduction);
+    const em=(STORE.empEmail||{})[nm];
+    return `<tr><td><b>${esc(nm)}</b></td>
+      <td class="muted" style="font-size:12.5px">${em?esc(em):'<span class="muted">not set</span>'}</td>
+      <td class="num">${active.length}${loans.length>active.length?` <span class="muted">/ ${loans.length}</span>`:''}</td>
+      <td>${loans.map(l=>agencyPill(l.agency)+' '+typePill(l.loanType)).join(' ')||'<span class="muted">no loans</span>'}</td>
+      <td class="num">${deduction>0?peso(deduction):'<span class="muted">&#8211;</span>'}</td>
+      <td class="num">${peso(paid)}</td>
+      <td class="num">${hasBal?peso(remaining):'<span class="muted">&#8211;</span>'}</td>
+      <td class="act"><button class="rowbtn" onclick="printStatement('${esc(nm).replace(/'/g,"\\'")}')">Statement</button>
+        <button class="rowbtn" onclick="editEmployee('${esc(nm).replace(/'/g,"\\'")}')">Edit</button>
+        ${em?`<button class="rowbtn" onclick="resetEmployeePw('${esc(nm).replace(/'/g,"\\'")}')">Reset pw</button>`:''}
+        <button class="rowbtn del" onclick="deleteEmployee('${esc(nm).replace(/'/g,"\\'")}')">Delete</button></td></tr>`;}).join("");
+  return `<div class="view"><div class="page-head"><div class="ht"><h2>Employees</h2><p>Each person's loan load at a glance, plus the email that links their self-service login to their own records.</p></div>
+      <button class="btn btn-primary" onclick="editEmployee()">+ Add employee</button></div>
+    <div class="tablewrap"><table><thead><tr><th>Employee</th><th>Email (login reference)</th><th class="num">Active loans</th><th>Loan types</th><th class="num">Monthly deduction</th><th class="num">Total paid</th><th class="num">Remaining</th><th class="act">Actions</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
+
+/* ===================== EXCEPTIONS ===================== */
+function viewExceptions(){
+  const exc=allExceptions();
+  const rows=exc.map(({e,l})=>`<tr><td>${agencyPill(l.agency)}</td><td>${esc(l.employee)}</td><td>${typePill(l.loanType)}</td><td>${esc(e.applicableMonth)}</td>
+    <td class="num">${typeof e.first15==="number"?peso(e.first15):'<span class="muted">&#8211;</span>'}</td>
+    <td class="num">${typeof e.second15==="number"?peso(e.second15):'<span class="muted">&#8211;</span>'}</td>
+    <td class="num">${typeof e.totalRecorded==="number"?peso(e.totalRecorded):'<span class="muted">&#8211;</span>'}</td>
+    <td class="num"><b>${peso(appliedOf(e))}</b></td><td class="muted">${esc(issueOf(e))}</td>
+    <td class="act">${caps().pay?`<button class="rowbtn" onclick="editEntry('${e.id}')">Fix</button>`:''}</td></tr>`).join("");
+  return `<div class="view"><div class="page-head"><div class="ht"><h2>Reconciliation Exceptions</h2><p>Payment rows where the recorded total does not equal 1st-15th plus 16th-30th. Open each to correct it.</p></div></div>
+    <div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+      <div class="kpi accent-warn"><div class="lab">Total exception rows</div><div class="val">${exc.length}</div></div>
+      <div class="kpi accent-sss"><div class="lab">SSS</div><div class="val">${exc.filter(x=>x.l.agency==='SSS').length}</div></div>
+      <div class="kpi accent-hdmf"><div class="lab">Pag-IBIG</div><div class="val">${exc.filter(x=>x.l.agency==='HDMF').length}</div></div></div>
+    <div class="tablewrap"><table><thead><tr><th>Agency</th><th>Employee</th><th>Type</th><th>Applicable month</th><th class="num">1st-15th</th><th class="num">16th-30th</th>
+      <th class="num">Total rec.</th><th class="num">Applied</th><th>Issue</th><th class="act"></th></tr></thead>
+    <tbody>${rows||'<tr><td colspan="10" class="muted" style="padding:18px">No exceptions.</td></tr>'}</tbody></table></div></div>`;
+}
+
+/* ===================== MEMBER SELF-SERVICE ===================== */
+let MEMBER_FILTER={loanId:"all",year:"all",month:"all",sort:"desc"};
+function setMemberFilter(k,v){ MEMBER_FILTER[k]=v; renderMember(); }
+function clearMemberFilter(){ MEMBER_FILTER={loanId:"all",year:"all",month:"all",sort:"desc"}; renderMember(); }
+function parseAppMonth(s){ const p=String(s||"").trim().split(/\s+/); return {mon:(p[0]||"").toUpperCase(), year:p[1]||""}; }
+function renderMember(){
+  const m=document.getElementById("main");
+  const all=STORE.loans.slice().sort((a,b)=>a.agency.localeCompare(b.agency)||a.loanType.localeCompare(b.loanType));
+  let tPay=0,tPaid=0,tRem=0,hasOb=false;
+  all.forEach(l=>{const s=loanStats(l); tPaid+=s.totalPaid; if(typeof s.obligation==="number"){tPay+=s.obligation;hasOb=true;} if(typeof s.balance==="number")tRem+=Math.max(0,s.balance);});
+  tPay=round2(tPay);tPaid=round2(tPaid);tRem=round2(tRem);
+  const activeN=all.filter(l=>l.status==="active").length;
+  const F=MEMBER_FILTER;
+  const years=[...new Set(STORE.entries.map(e=>parseAppMonth(e.applicableMonth).year).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+  const loanOpts=`<option value="all"${F.loanId==="all"?" selected":""}>All loans</option>`+all.map(l=>`<option value="${l.id}"${F.loanId===l.id?" selected":""}>${esc(agencyDisp(l.agency)+" "+l.loanType+(l.reference?" ("+l.reference+")":""))}</option>`).join("");
+  const yearOpts=`<option value="all"${F.year==="all"?" selected":""}>All years</option>`+years.map(y=>`<option value="${y}"${F.year===y?" selected":""}>${y}</option>`).join("");
+  const monthOpts=`<option value="all"${F.month==="all"?" selected":""}>All months</option>`+MONTH_NAMES.map(mn=>`<option value="${mn}"${F.month===mn?" selected":""}>${mn.charAt(0)+mn.slice(1).toLowerCase()}</option>`).join("");
+  const sortOpts=`<option value="desc"${F.sort==="desc"?" selected":""}>Newest first</option><option value="asc"${F.sort==="asc"?" selected":""}>Oldest first</option>`;
+  const filtered=(F.loanId!=="all"||F.year!=="all"||F.month!=="all");
+  let html=`<div class="view"><div class="page-head"><div class="ht"><h2>My Loans</h2><p>Your SSS and Pag-IBIG loans, balances, and contribution history. Use the filters to focus on a loan, year, or month.</p></div></div>
+    <div class="kpis">
+      <div class="kpi accent-brand"><div class="lab">Active loans</div><div class="val">${activeN}</div><div class="hint">${all.length} total on file</div></div>
+      <div class="kpi accent-sss"><div class="lab">Total to be paid</div><div class="val">${hasOb?peso(tPay):'&#8211;'}</div></div>
+      <div class="kpi accent-brand"><div class="lab">Total paid</div><div class="val">${peso(tPaid)}</div></div>
+      <div class="kpi accent-hdmf"><div class="lab">Remaining balance</div><div class="val">${hasOb?peso(tRem):'&#8211;'}</div></div>
+    </div>`;
+  if(all.length){
+    html+=`<div class="toolbar">
+      <select aria-label="Loan" onchange="setMemberFilter('loanId',this.value)">${loanOpts}</select>
+      <select aria-label="Year" onchange="setMemberFilter('year',this.value)">${yearOpts}</select>
+      <select aria-label="Month" onchange="setMemberFilter('month',this.value)">${monthOpts}</select>
+      <select aria-label="Sort" onchange="setMemberFilter('sort',this.value)">${sortOpts}</select>
+      ${filtered?`<button class="btn btn-ghost btn-sm" onclick="clearMemberFilter()">Clear filters</button>`:""}
+    </div>`;
+  }
+  if(!all.length){ html+=`<div class="card"><p class="muted">No loans are linked to your account yet. Please contact HR.</p></div>`; }
+  const shown=(F.loanId==="all")?all:all.filter(l=>l.id===F.loanId);
+  if(all.length && !shown.length){ html+=`<div class="card"><p class="muted">No loan matches the current filter.</p></div>`; }
+  shown.forEach(l=>{ const s=loanStats(l);
+    let acc=0; const withRun=s.entries.map(e=>{ acc+=appliedOf(e); return {e,run:round2(acc)}; });
+    let disp=withRun.filter(({e})=>{ const pm=parseAppMonth(e.applicableMonth); return (F.year==="all"||pm.year===F.year) && (F.month==="all"||pm.mon===F.month); });
+    disp.sort((a,b)=>(monthIndex(a.e.applicableMonth)-monthIndex(b.e.applicableMonth))*(F.sort==="asc"?1:-1));
+    const shownPaid=round2(disp.reduce((t,{e})=>t+appliedOf(e),0));
+    const rows=disp.map(({e,run})=>`<tr><td>${esc(e.applicableMonth)}</td>
+      <td class="num">${peso(appliedOf(e))}</td><td class="num">${peso(run)}</td><td>${esc(nextMonth(e.applicableMonth))}</td><td class="muted">${esc(e.paymentType||'')}</td></tr>`).join("");
+    const badge=l.status==="closed"?'<span class="pill closed">closed</span>':(s.fullyPaid?'<span class="pill ok">fully paid</span>':'<span class="pill sss">active</span>');
+    const cnt=`<span class="tag">${disp.length} of ${withRun.length} month${withRun.length!==1?'s':''}${(F.year!=="all"||F.month!=="all")?", "+peso(shownPaid)+" shown":""}</span>`;
+    html+=`<div class="card" style="margin-bottom:16px">
+      <div class="detail-head"><h3 style="font-size:16px">${agencyDisp(l.agency)} ${esc(l.loanType)}${l.reference?' ('+esc(l.reference)+')':''}</h3> ${badge}
+        <div class="detail-actions"><button class="btn btn-ghost btn-sm" onclick="printStatement('${esc(l.employee).replace(/'/g,"\\'")}')">Print statement</button></div></div>
+      <div class="facts">
+        <div class="fact"><div class="l">Total to be paid</div><div class="v">${typeof s.obligation==="number"?peso(s.obligation):"not set"}</div></div>
+        <div class="fact"><div class="l">Total paid</div><div class="v">${peso(s.totalPaid)}</div></div>
+        <div class="fact"><div class="l">Remaining balance</div><div class="v">${typeof s.balance==="number"?peso(s.balance):"&#8211;"}</div></div>
+        <div class="fact"><div class="l">Monthly amortization</div><div class="v">${typeof l.monthlyAmort==="number"?peso(l.monthlyAmort):"&#8211;"}</div></div>
+        <div class="fact"><div class="l">Paid through</div><div class="v" style="font-size:13px">${s.lastMonth!=="none"?esc(s.lastMonth):"none"}</div></div>
+      </div>
+      <div class="tablewrap" style="box-shadow:none;border:none"><table><thead><tr><th>Applicable month ${cnt}</th><th class="num">Amount</th><th class="num">Running total</th><th>Due month</th><th>Type</th></tr></thead>
+      <tbody>${rows||'<tr><td colspan="5" class="muted" style="padding:12px">No payments match the current filter.</td></tr>'}</tbody></table></div>
+    </div>`; });
+  html+=`</div>`; m.innerHTML=html;
+  document.getElementById("foot").innerHTML="Employee self-service &middot; you can view only your own records";
+}
+
+/* ===================== DYNAMIC BINDINGS ===================== */
+function bindDynamic(){
+  if(STATE.view==="loans"){ document.getElementById("loanRows").innerHTML=loanRowsHTML();
+    ["fSearch","fAgency","fType","fStatus"].forEach(id=>{const el=document.getElementById(id);if(el)el.oninput=el.onchange=()=>document.getElementById("loanRows").innerHTML=loanRowsHTML();}); }
+  if(STATE.view==="ledger"){ document.getElementById("gRows").innerHTML=ledgerRowsHTML();
+    ["gSearch","gAgency","gEmp","gMonth","gYear","gVar"].forEach(id=>{const el=document.getElementById(id);if(el)el.oninput=el.onchange=()=>document.getElementById("gRows").innerHTML=ledgerRowsHTML();}); }
+  if(STATE.view==="post")renderPostRows();
+  if(STATE.view==="reports")renderRemit();
+}
+
+/* ===================== MODALS / FORMS ===================== */
+function closeModal(){ document.getElementById("modalHost").innerHTML=""; }
+function modal(html,cls){ document.getElementById("modalHost").innerHTML=`<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal ${cls||''}">${html}</div></div>`; }
+function opt(list,sel){ return list.map(o=>{const v=Array.isArray(o)?o[0]:o,l=Array.isArray(o)?o[1]:o;return `<option value="${esc(v)}" ${v===sel?'selected':''}>${esc(l)}</option>`;}).join(""); }
+function fnum(id){ const v=document.getElementById(id).value.trim(); if(v==="")return null; const n=Number(v.replace(/,/g,"")); return isNaN(n)?NaN:round2(n); }
+
+function editLoan(id){
+  if(!need("loans"))return;
+  const l=id?loanById(id):null;
+  const empOpts=STORE.employees.slice().sort().map(e=>`<option ${l&&l.employee===e?'selected':''}>${esc(e)}</option>`).join("");
+  modal(`<h3>${l?'Edit loan':'Add loan'}</h3><div class="form-grid">
+    <div class="field full"><label>Employee</label><select id="lfEmp">${empOpts}</select><div class="hintline">Not listed? Add them in the Employees tab first.</div></div>
+    <div class="field"><label>Agency</label><select id="lfAgency" onchange="syncLoanTypes()">${opt(AGENCIES,l?l.agency:'SSS')}</select></div>
+    <div class="field"><label>Loan type</label><select id="lfType"></select></div>
+    <div class="field"><label>Total amount to be paid (&#8369;)</label><input id="lfTotal" type="text" inputmode="decimal" placeholder="principal + interest" value="${l&&typeof l.totalPayable==='number'?l.totalPayable:''}"><div class="hintline">The full amount to repay over the loan. This drives the remaining balance.</div></div>
+    <div class="field"><label>Loan term (months)</label><input id="lfTerm" type="text" inputmode="numeric" placeholder="e.g. 24" value="${l&&typeof l.termMonths==='number'?l.termMonths:''}"><div class="hintline">Optional. If set, total to pay = amortization x term.</div></div>
+    <div class="field"><label>Monthly amortization (&#8369;)</label><input id="lfAmort" type="text" inputmode="decimal" placeholder="optional" value="${l&&typeof l.monthlyAmort==='number'?l.monthlyAmort:''}"></div>
+    <div class="field"><label>Loan amount granted (principal, optional)</label><input id="lfAmt" type="text" inputmode="decimal" placeholder="optional" value="${l&&typeof l.loanAmount==='number'?l.loanAmount:''}"></div>
+    <div class="field"><label>First amortization month</label>${monthYearPicker('lfFirst',l?l.firstMonth:'',{allowBlank:true})}</div>
+    <div class="field"><label>Reference (optional)</label><input id="lfRef" type="text" placeholder="e.g. 2024 cycle / voucher no." value="${l&&l.reference?esc(l.reference):''}"></div>
+    <div class="field full"><label>HR notes (optional)</label><input id="lfNotes" type="text" placeholder="e.g. restructured, on hold during leave, company-settled" value="${l&&l.notes?esc(l.notes):''}"></div>
+    </div><div class="form-msg" id="lfMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLoan(${id?`'${id}'`:'null'})">${l?'Save changes':'Add loan'}</button></div>`);
+  syncLoanTypes(l?l.loanType:null);
+}
+function syncLoanTypes(preset){
+  const ag=document.getElementById("lfAgency").value, list=AGENCY_TYPES[ag]||[];
+  const cur=(preset!==undefined&&preset!==null)?preset:document.getElementById("lfType").value;
+  const keep=list.some(o=>o[0]===cur)?cur:list[0][0];
+  document.getElementById("lfType").innerHTML=opt(list,keep);
+}
+async function saveLoan(id){
+  if(!need('loans'))return;
+  const emp=document.getElementById("lfEmp").value, agency=document.getElementById("lfAgency").value, loanType=document.getElementById("lfType").value;
+  const amt=fnum("lfAmt"),amort=fnum("lfAmort"),total=fnum("lfTotal"),termRaw=fnum("lfTerm");
+  const firstMonth=readMonthYear('lfFirst')||null,reference=document.getElementById("lfRef").value.trim()||null,notes=document.getElementById("lfNotes").value.trim()||null;
+  const term=(typeof termRaw==="number")?Math.round(termRaw):termRaw;
+  const msg=document.getElementById("lfMsg");
+  if(!emp){msg.textContent="Choose an employee.";return;}
+  if(isNaN(amt)||isNaN(amort)||isNaN(total)||isNaN(term)){msg.textContent="Amounts and term must be numbers.";return;}
+  const dup=STORE.loans.find(l=>l.id!==id&&l.employee===emp&&l.agency===agency&&l.loanType===loanType&&l.status==="active");
+  if(dup&&!reference){msg.textContent=`${emp} already has an active ${agencyDisp(agency)} ${loanType} loan. Add a reference to keep a second one, or edit the existing loan.`;return;}
+  const rec={employee:emp,agency,loan_type:loanType,loan_amount:amt,monthly_amort:amort,total_payable:total,term_months:term,first_month:firstMonth,reference,notes};
+  try{ let res=id?await sb.from("loans").update(rec).eq("id",id):await sb.from("loans").insert(rec); if(res.error)throw res.error; }
+  catch(err){ msg.textContent="Save failed: "+(err.message||err); return; }
+  logAudit(id?"update":"create","loan",id||(emp+"|"+agency+"|"+loanType));
+  closeModal(); toast(id?"Loan updated":"Loan added"); await reloadRender();
+}
+function deleteLoan(id){
+  if(!need('loans'))return;
+  const l=loanById(id); if(!l)return; const n=entriesForLoan(l).length;
+  confirmModal(`Delete the ${agencyDisp(l.agency)} ${l.loanType} loan for <b>${esc(l.employee)}</b>?`,
+    n?`This also deletes its ${n} payment entr${n>1?'ies':'y'}. This cannot be undone.`:`This cannot be undone.`,
+    (async()=>{ const {error}=await sb.from("loans").delete().eq("id",id); if(error){toast("Delete failed: "+error.message);return;}
+      logAudit("delete","loan",id); toast("Loan deleted"); const back=STATE.view==="loanDetail"; await loadData(); if(back){go("loans");} else {(CURRENT_ROLE==="member")?renderMember():render();} }));
+}
+
+function bulkAmounts(){
+  if(!need("loans"))return;
+  const rows=STORE.loans.slice().sort((a,b)=>a.employee.localeCompare(b.employee)).map(l=>`
+    <tr data-loan="${l.id}"><td>${esc(l.employee)}</td><td>${agencyPill(l.agency)} ${typePill(l.loanType)}</td>
+    <td><input type="text" inputmode="decimal" class="baTotal" placeholder="total to pay" value="${typeof l.totalPayable==='number'?l.totalPayable:''}"></td>
+    <td><input type="text" inputmode="numeric" class="baTerm" placeholder="term" value="${typeof l.termMonths==='number'?l.termMonths:''}"></td>
+    <td><input type="text" inputmode="decimal" class="baAmort" placeholder="amort" value="${typeof l.monthlyAmort==='number'?l.monthlyAmort:''}"></td>
+    <td><input type="text" inputmode="decimal" class="baAmt" placeholder="principal" value="${typeof l.loanAmount==='number'?l.loanAmount:''}"></td></tr>`).join("");
+  modal(`<h3>Set loan amounts</h3><p class="hintline" style="margin-bottom:10px">Enter each loan's total to be paid (or the term plus amortization) to activate the remaining balance and payoff estimates. Principal is optional.</p>
+    <div class="tablewrap" style="box-shadow:none;max-height:52vh"><table class="gridtable"><thead><tr><th>Employee</th><th>Loan</th><th style="width:120px">Total to pay</th><th style="width:80px">Term</th><th style="width:110px">Amortization</th><th style="width:110px">Principal</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="form-msg" id="baMsg"></div><div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveBulkAmounts()">Save all</button></div>`,"wide");
+}
+async function saveBulkAmounts(){
+  if(!need('loans'))return;
+  const ops=[];
+  document.querySelectorAll("#modalHost tr[data-loan]").forEach(tr=>{
+    const l=loanById(tr.dataset.loan); const pn=v=>{v=(v||"").trim();if(v==="")return null;const n=Number(v.replace(/,/g,""));return isNaN(n)?undefined:round2(n);};
+    const amt=pn(tr.querySelector(".baAmt").value), amort=pn(tr.querySelector(".baAmort").value);
+    const total=pn(tr.querySelector(".baTotal").value), term=pn(tr.querySelector(".baTerm").value);
+    const patch={};
+    if(amt!==undefined&&amt!==l.loanAmount)patch.loan_amount=amt;
+    if(amort!==undefined&&amort!==l.monthlyAmort)patch.monthly_amort=amort;
+    if(total!==undefined&&total!==l.totalPayable)patch.total_payable=total;
+    if(term!==undefined){const t=term===null?null:Math.round(term); if(t!==l.termMonths)patch.term_months=t;}
+    if(Object.keys(patch).length)ops.push({id:l.id,patch});
+  });
+  if(!ops.length){ closeModal(); toast("No changes"); return; }
+  try{ for(const o of ops){ const {error}=await sb.from("loans").update(o.patch).eq("id",o.id); if(error)throw error; } }
+  catch(err){ toast("Save failed: "+(err.message||err)); return; }
+  closeModal(); toast(`Updated ${ops.length} loan${ops.length>1?'s':''}`); await reloadRender();
+}
+
+function editEntry(id,presetLoanId){
+  if(!need("pay"))return;
+  const e=id?STORE.entries.find(x=>x.id===id):null;
+  const loans=STORE.loans.slice().sort((a,b)=>a.employee.localeCompare(b.employee));
+  if(!loans.length){ modal(`<h3>No loans yet</h3><p class="muted">Add a loan first, then record payments against it.</p><div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Close</button><button class="btn btn-primary" onclick="closeModal();editLoan()">Add loan</button></div>`,"narrow"); return; }
+  let curLoanId=presetLoanId||(e?e.loanId:"")||loans[0].id;
+  const loanOpts=loans.map(l=>`<option value="${l.id}" ${l.id===curLoanId?'selected':''}>${esc(loanLabel(l))}</option>`).join("");
+  modal(`<h3>${e?'Edit payment entry':'Record payment'}</h3><div class="form-grid">
+    <div class="field full"><label>Loan</label><select id="efLoan">${loanOpts}</select></div>
+    <div class="field"><label>Applicable month</label>${monthYearPicker('efM',e?e.applicableMonth:currentMonthName(),{})}<div class="hintline">Payment is due the following month.</div></div>
+    <div class="field"><label>Payment type</label><select id="efType">${opt(PAYMENT_TYPES,e?e.paymentType:'REGULAR')}</select></div>
+    <div class="field"><label>1st - 15th (&#8369;)</label><input id="efH1" type="text" inputmode="decimal" placeholder="0.00" value="${e&&typeof e.first15==='number'?e.first15:''}"></div>
+    <div class="field"><label>16th - 30th (&#8369;)</label><input id="efH2" type="text" inputmode="decimal" placeholder="0.00" value="${e&&typeof e.second15==='number'?e.second15:''}"></div>
+    <div class="field"><label>Total as recorded (&#8369;)</label><input id="efTot" type="text" inputmode="decimal" placeholder="leave blank to use halves" value="${e&&typeof e.totalRecorded==='number'?e.totalRecorded:''}"><div class="hintline">Optional. Fill only if the payslip shows one combined total.</div></div>
+    <div class="field"><label>OR / Ref no.</label><input id="efRef" type="text" value="${e&&e.orRef?esc(e.orRef):''}"></div>
+    <div class="field full"><label>Remarks</label><input id="efRem" type="text" value="${e&&e.remarks?esc(e.remarks):''}"></div>
+    </div><div class="form-msg" id="efMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveEntry(${id?`'${id}'`:'null'})">${e?'Save changes':'Add payment'}</button></div>`);
+}
+async function saveEntry(id){
+  if(!need('pay'))return;
+  const loan=loanById(document.getElementById("efLoan").value);
+  const applicableMonth=readMonthYear('efM')||currentMonthName(), paymentType=document.getElementById("efType").value;
+  const h1=fnum("efH1"),h2=fnum("efH2"),tot=fnum("efTot"),orRef=document.getElementById("efRef").value.trim()||null,remarks=document.getElementById("efRem").value.trim()||null;
+  const msg=document.getElementById("efMsg");
+  if(!loan){msg.textContent="Choose a loan.";return;}
+  if(isNaN(h1)||isNaN(h2)||isNaN(tot)){msg.textContent="Amounts must be numbers.";return;}
+  if(h1===null&&h2===null&&tot===null){msg.textContent="Enter at least one amount.";return;}
+  const dup=STORE.entries.find(x=>x.id!==id&&x.loanId===loan.id&&x.applicableMonth===applicableMonth);
+  if(dup){msg.textContent="An entry for "+applicableMonth+" already exists on this loan. Edit that entry instead.";return;}
+  const rec={loan_id:loan.id,applicable_month:applicableMonth,or_ref:orRef,first15:h1,second15:h2,total_recorded:tot,payment_type:paymentType,remarks};
+  try{ let res=id?await sb.from("ledger_entries").update(rec).eq("id",id):await sb.from("ledger_entries").insert(rec); if(res.error)throw res.error; }
+  catch(err){ msg.textContent="Save failed: "+(err.message||err); return; }
+  logAudit(id?"update":"create","payment",loan.employee+" "+applicableMonth);
+  closeModal(); toast(id?"Payment updated":"Payment recorded"); await reloadRender();
+}
+function deleteEntry(id){
+  if(!need('pay'))return;
+  const e=STORE.entries.find(x=>x.id===id); if(!e)return; const l=loanById(e.loanId);
+  confirmModal(`Delete the ${esc(e.applicableMonth)} payment for <b>${esc(l?l.employee:'')}</b>?`,`This cannot be undone.`,
+    (async()=>{ const {error}=await sb.from("ledger_entries").delete().eq("id",id); if(error){toast("Delete failed: "+error.message);return;} logAudit("delete","payment",id); toast("Payment deleted"); await reloadRender(); }));
+}
+
+function editEmployee(name){
+  if(!need("employees"))return;
+  const em=name?((STORE.empEmail||{})[name]||""):"";
+  modal(`<h3>${name?'Edit employee':'Add employee'}</h3>
+    <div class="field"><label>Full name (Surname, First name)</label>
+    <input id="emName" type="text" value="${name?esc(name):''}" placeholder="e.g. Dela Cruz, Juan"></div>
+    <div class="field"><label>Email (login reference)</label>
+    <input id="emEmail" type="email" value="${esc(em)}" placeholder="e.g. juan.delacruz@gmail.com">
+    <div class="hintline">This email links their self-service login to this record. When they sign in with it, they see only their own loans.</div></div>
+    <div class="form-msg" id="emMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="saveEmployee(${name?`'${esc(name).replace(/'/g,"\\'")}'`:'null'})">${name?'Save':'Add'}</button></div>`,"narrow");
+}
+async function saveEmployee(oldName){
+  if(!need('employees'))return;
+  const nm=document.getElementById("emName").value.trim(), msg=document.getElementById("emMsg");
+  const email=document.getElementById("emEmail").value.trim()||null;
+  const oldEmail=oldName?((STORE.empEmail||{})[oldName]||null):null;
+  if(!nm){msg.textContent="Enter a name.";return;}
+  if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.textContent="Enter a valid email, or leave it blank.";return;}
+  if(STORE.employees.some(e=>e.toLowerCase()===nm.toLowerCase()&&e!==oldName)){msg.textContent="That employee already exists.";return;}
+  msg.textContent="Saving...";
+  try{
+    if(oldName){ let r1=await sb.from("employees").update({name:nm,email}).eq("name",oldName); if(r1.error)throw r1.error;
+      let r2=await sb.from("loans").update({employee:nm}).eq("employee",oldName); if(r2.error)throw r2.error;
+      if(nm!==oldName){ await sb.from("profiles").update({employee:nm}).eq("employee",oldName); } }
+    else { let r=await sb.from("employees").insert({name:nm,email}); if(r.error)throw r.error; }
+  }catch(err){ msg.textContent="Save failed: "+(err.message||err); return; }
+  // Sync the login account. Idempotent: creates the account if missing, otherwise re-enables and relinks it.
+  let note="";
+  try{
+    if(email){
+      const {data,error}=await sb.functions.invoke("manage-user",{body:{action:"sync_email",employee:nm,email}});
+      if(error) throw new Error((data&&data.error)||error.message);
+      if(data&&data.error) throw new Error(data.error);
+      note=(data&&data.created)?` Login created for ${nm} (temporary password Better@1234).`:` Login for ${nm} is linked and active.`;
+    } else if(oldEmail){
+      await sb.functions.invoke("manage-user",{body:{action:"disable_email",email:oldEmail}});
+      note=" That person's login was disabled and unlinked.";
+    }
+  }catch(e){ closeModal(); toast((oldName?"Employee saved":"Employee added")+", but the login could not be synced: "+(e.message||e)); await reloadRender(); return; }
+  closeModal(); toast((oldName?"Employee saved":"Employee added")+note); await reloadRender();
+}
+function resetEmployeePw(name){
+  if(!need('employees'))return;
+  const email=(STORE.empEmail||{})[name];
+  if(!email){ toast("Set this employee's email first, then a login can be created."); return; }
+  modal(`<h3>Reset password</h3><p class="muted" style="margin:0 0 8px">For <b>${esc(name)}</b> &middot; ${esc(email)}</p>
+    <div class="field"><label>New password</label><input id="rpNew" type="text" value="Better@1234"><div class="hintline">Give this to the employee. They can change it later on their own Password screen.</div></div>
+    <div class="form-msg" id="rpMsg"></div>
+    <div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="doResetEmployeePw('${esc(name).replace(/'/g,"\\'")}')">Reset password</button></div>`,"narrow");
+}
+async function doResetEmployeePw(name){
+  const email=(STORE.empEmail||{})[name]; const pw=document.getElementById("rpNew").value; const msg=document.getElementById("rpMsg");
+  if(!pw||pw.length<6){ msg.textContent="Password must be at least 6 characters."; return; }
+  msg.textContent="Resetting...";
+  try{
+    const {data,error}=await sb.functions.invoke("manage-user",{body:{action:"reset_password",email,password:pw}});
+    if(error) throw new Error((data&&data.error)||error.message);
+    if(data&&data.error) throw new Error(data.error);
+  }catch(e){ msg.textContent="Reset failed: "+(e.message||e); return; }
+  closeModal(); toast("Password for "+name+" reset to: "+pw);
+}
+function deleteEmployee(name){
+  if(!need('employees'))return;
+  const loans=STORE.loans.filter(l=>l.employee===name).length;
+  if(loans){confirmModal(`Delete <b>${esc(name)}</b>?`,`This employee has ${loans} loan${loans>1?'s':''}. Delete those loans first.`,null,"Got it");return;}
+  const em=(STORE.empEmail||{})[name];
+  confirmModal(`Remove <b>${esc(name)}</b> from the employee list?`,`This cannot be undone.${em?" Their login will be disabled and unlinked.":""}`,(async()=>{ const {error}=await sb.from("employees").delete().eq("name",name); if(error){toast("Delete failed: "+error.message);return;} if(em){ try{ await sb.functions.invoke("manage-user",{body:{action:"disable_email",email:em}}); }catch(e){} } toast("Employee removed"); await reloadRender(); }));
+}
+
+function confirmModal(title,body,onYes,okOnlyLabel){
+  modal(`<h3>${title}</h3><p class="muted" style="margin:0 0 4px">${body}</p>
+    <div class="foot">${onYes?`<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-danger" id="cfYes">Delete</button>`:`<button class="btn btn-primary" onclick="closeModal()">${okOnlyLabel||'OK'}</button>`}</div>`,"narrow");
+  if(onYes)document.getElementById("cfYes").onclick=()=>{closeModal();onYes();};
+}
+
+function openPw(){ modal(`<h3>Change password</h3>
+  <div class="field"><label>New password</label><input id="pwNew" type="password"></div>
+  <div class="field"><label>Confirm new password</label><input id="pwNew2" type="password"></div>
+  <div class="form-msg" id="pwErr"></div><div class="foot"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="savePw()">Save</button></div>`,"narrow"); }
+async function savePw(){
+  const n=document.getElementById("pwNew").value,n2=document.getElementById("pwNew2").value,err=document.getElementById("pwErr");
+  if(n.length<6){err.textContent="New password must be at least 6 characters.";return;}
+  if(n!==n2){err.textContent="New passwords do not match.";return;}
+  const {error}=await sb.auth.updateUser({password:n}); if(error){err.textContent=error.message;return;}
+  closeModal(); toast("Password updated");
+}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(STORE,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="loan-monitoring-backup-"+new Date().toISOString().slice(0,10)+".json"; a.click(); URL.revokeObjectURL(a.href); toast("Backup downloaded");
+}
+
+/* ===================== INIT ===================== */
+sb.auth.getSession().then(({data})=>{ if(data&&data.session){ onSignedIn(); } else { const p=document.getElementById("p"); if(p)p.focus(); } });
+</script>
+</body>
+</html>
